@@ -1,15 +1,20 @@
 import { Directive, ElementRef, HostListener, Optional } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { LocaleService } from './locale.service';
 
 @Directive({
   selector: '[dlNumericInput]'
 })
 export class NumericInputDirective {
-  private readonly decimalSeparator = '';
+  private readonly decimalSeparator = this.localeService.getDecimalSeparator();
   private readonly integerUnsigned = '^[0-9]*$';
   private readonly decimalSigned = '^-?[0-9]+(.[0-9]+)?$';
 
-  constructor(private hostElement: ElementRef,  @Optional() private control: NgControl) {}
+  constructor(
+    private hostElement: ElementRef,  
+    private localeService: LocaleService,
+    @Optional() private control?: NgControl
+  ) {}
 
   @HostListener('change', ['$event']) onChange() {
     this.parseValue(this.hostElement.nativeElement.value);
@@ -101,7 +106,9 @@ export class NumericInputDirective {
 
   private setValue(value: string): void {
     this.hostElement.nativeElement.value = value;
-    this.control.control?.patchValue(Number(value.replace(this.decimalSeparator, '.')));
+    if (this.control) {
+      this.control.control?.patchValue(Number(value.replace(this.decimalSeparator, '.')));
+    }
   }
 
   private getAllowedKeys(e: KeyboardEvent): string[] {
