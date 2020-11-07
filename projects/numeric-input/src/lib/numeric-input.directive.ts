@@ -105,6 +105,7 @@ export class NumericInputDirective implements AfterViewInit {
   }
 
   private overrideInputType(input: HTMLInputElement): void {
-    input.setAttribute('type', 'tel');
+    input.setAttribute('type', 'text');
+    input.setAttribute('inputmode', 'numeric');
   }
 }
