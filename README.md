@@ -12,7 +12,12 @@ based in Israel.
 * [Numeric Input Directive](https://github.com/Danieliverant/ng-dl/tree/master/projects/numeric-input).
 
 ## 👋 Contact Me
-Please fill free to contact me at - [liverant95@gmail.com](mailto:liverant95@gmail.com).
+Please fill free to contact me at: 
+
+[![Gmail:](https://img.shields.io/badge/gmail-D14836?&style=for-the-badge&logo=gmail&logoColor=white)](mailto:liverant95@gmail.com)
+
+
+[![Linkedin:](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/liverant/)
 
 ## 📝 License
-[MIT](https://github.com/Danieliverant/ng-dl/blob/master/projects/numeric-input/LICENSE)
+[MIT](https://github.com/Danieliverant/ng-dl/blob/master/README.md)
