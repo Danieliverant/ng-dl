@@ -1,12 +1,12 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { LOCALE } from './locale.tokens';
+import { NUMERIC_INPUT_LOCALE } from './locale.tokens';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocaleService {
 
-  constructor(@Inject(LOCALE) @Optional() private locale?: string) { }
+  constructor(@Inject(NUMERIC_INPUT_LOCALE) @Optional() private locale?: string) { }
 
   public getDecimalSeparator(): string {
     const locale = this.getLocale();

@@ -1,27 +1,18 @@
-# NgDl
+# 🛡️ NG-DL
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+Simple solutions for real problems in the web development world.
+## 👨‍💻 About Me
 
-## Development server
+My name is Daniel Liverant I'm a front-end developer mainly focused on Angular, 
+based in Israel.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## 📋 Table of Contents
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* [Numeric Input Directive](https://github.com/Danieliverant/ng-dl/tree/master/projects/numeric-input).
 
-## Build
+## 👋 Contact Me
+Please fill free to contact me at - [liverant95@gmail.com](mailto:liverant95@gmail.com).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 📝 License
+[MIT](https://github.com/Danieliverant/ng-dl/blob/master/projects/numeric-input/LICENSE)

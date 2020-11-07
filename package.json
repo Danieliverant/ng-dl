@@ -8,7 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-numeric-input": "ng build numeric-input --prod"
+    "build-numeric-input": "ng build numeric-input --prod",
+    "publish-numeric-input": "cd dist/numeric-input && npm publish",
+    "install-numeric-input": "npm i @ng-dl/numeric-input@latest",
+    "pack-numeric-input": "npm run build-numeric-input && npm run publish-numeric-input && npm run install-numeric-input"
   },
   "author": {
     "name": "Daniel Liverant",
@@ -33,7 +36,7 @@
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
-    "@ng-dl/numeric-input": "0.0.5",
+    "@ng-dl/numeric-input": "0.0.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

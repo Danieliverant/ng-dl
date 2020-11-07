@@ -1,24 +1,49 @@
-# NumericInput
+# Numeric Input Directive
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+Sync browsers' behavior and localization on numeric inputs.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project numeric-input` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project numeric-input`.
-> Note: Don't forget to add `--project numeric-input` or else it will be added to the default project in your `angular.json` file. 
+Install with [NPM](https://www.npmjs.com/get-npm):
 
-## Build
+```bash
+npm i @ng-dl/numeric-input
+```
 
-Run `ng build numeric-input` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Usage
 
-## Publishing
+```ts
+import { NumericInputModule } from '@ng-dl/numeric-input';
 
-After building your library with `ng build numeric-input`, go to the dist folder `cd dist/numeric-input` and run `npm publish`.
+@NgModule({
+  ...,
+  imports: [..., NumericInputModule]
+})
+export class AppModule { }
+```
+Override default browser locale with any [supported locale](https://developer.chrome.com/webstore/i18n#localeTable).
 
-## Running unit tests
+```ts
+import { NumericInputModule, NUMERIC_INPUT_LOCALE } from '@ng-dl/numeric-input';
 
-Run `ng test numeric-input` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  ...,
+  imports: [..., NumericInputModule],
+  providers: [{ provide: NUMERIC_INPUT_LOCALE, useValue: 'custom-locale' }]
+})
+export class AppModule { }
+```
+Apply the directive:
+```html
+<input dlNumericInput/>
+```
 
-## Further help
+## Contributing
+Pull requests are welcome. Suggestions are welcome.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://github.com/Danieliverant/ng-dl/blob/master/projects/numeric-input/LICENSE)

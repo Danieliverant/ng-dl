@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { LOCALE, NumericInputModule } from 'projects/numeric-input/src/public-api';
+// import { NUMERIC_INPUT_LOCALE, NumericInputModule } from 'projects/numeric-input/src/public-api';
 import { NumericInputModule } from '@ng-dl/numeric-input';
 
 @NgModule({
