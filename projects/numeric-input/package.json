@@ -1,6 +1,21 @@
 {
   "name": "@ng-dl/numeric-input",
-  "version": "0.0.4",
+  "version": "0.0.5",
+  "description": "override browser's default behavior & localization on numeric inputs",
+  "author": {
+    "name": "Daniel Liverant",
+    "email": "liverant95@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Danieliverant/ng-dl/tree/master/projects/numeric-input"
+  },
+  "bugs": {
+    "url": "https://github.com/Danieliverant/ng-dl/issues"
+  },
+  "homepage": "https://github.com/Danieliverant/ng-dl",
+  "keywords": ["angular", "directive", "angular-material", "input"],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^10.2.0",
     "@angular/core": "^10.2.0"
