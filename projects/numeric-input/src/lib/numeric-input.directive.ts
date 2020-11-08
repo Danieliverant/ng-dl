@@ -54,21 +54,17 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   }
 
   private setValue(value: string): void {
-    this.el.value = value;
+    const formattedValue = Number(value.replace(this.decimalSeparator, '.'));
+    this.el.value = formattedValue.toString();
     if (this.control) {
-      this.control.control?.patchValue(
-        Number(value.replace(this.decimalSeparator, '.'))
-      );
+      this.control.control?.patchValue(formattedValue);
     }
   }
 
   private onChange(): void {
     fromEvent(this.el, 'change').pipe(
       takeUntil(this.destroy$),
-      tap(() => {
-        console.log('hi');
-        this.parseValue(this.el.value);
-      })
+      tap(() => this.parseValue(this.el.value))
     ).subscribe();
   }
 
