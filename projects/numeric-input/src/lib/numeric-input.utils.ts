@@ -42,7 +42,7 @@ export function isActionKey(e: KeyboardEvent): boolean {
 }
 
 export function replaceSeparator(value: string, decimalSeparator: string): string {
-  const separator = value.replace(NUMBERS_REGEX, '');
+  const separator = value.replace('-', '').replace(NUMBERS_REGEX, '');
   return value.replace(separator || decimalSeparator, decimalSeparator);
 }
 
