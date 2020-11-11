@@ -1,27 +1,19 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  OnDestroy,
-  Optional,
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, OnDestroy, Optional } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { fromEvent, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, merge, Observable, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { LocaleService } from './locale.service';
 import {
   appendZeroToDecimal,
-  getAllowedKeys,
-  getKeyName,
-  isActionKey,
+  isAllowedKey,
+  isNumberKey,
   overrideInputType,
   replaceSeparator,
-  SIGNED_DOUBLE_REGEX,
-  UNSIGNED_INTEGER_REGEX,
+  SIGNED_DOUBLE_REGEX
 } from './numeric-input.utils';
 
 @Directive({
-  selector: '[dlNumericInput]',
+  selector: '[dlNumericInput]'
 })
 export class NumericInputDirective implements AfterViewInit, OnDestroy {
   private readonly decimalSeparator = this.localeService.getDecimalSeparator();
@@ -35,11 +27,9 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     overrideInputType(this.el);
-    
+
     this.onKeyDown();
-    this.onChange();
-    this.onDrop();
-    this.onPaste();
+    this.onValueChange();
   }
 
   ngOnDestroy(): void {
@@ -61,52 +51,42 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
     }
   }
 
-  private onChange(): void {
-    fromEvent(this.el, 'change').pipe(
-      takeUntil(this.destroy$),
-      tap(() => this.parseValue(this.el.value))
-    ).subscribe();
+  private onChange(): Observable<string> {
+    return fromEvent(this.el, 'change').pipe(map(() => this.el.value));
   }
 
-  private onPaste(): void {
-    fromEvent(this.el, 'paste').pipe(
-      takeUntil(this.destroy$),
-      tap((e: ClipboardEvent) => this.parseValue(e.clipboardData?.getData('text/plain') || '')),
-      tap((e: ClipboardEvent) => e.preventDefault())
-    ).subscribe();
+  private onPaste(): Observable<string> {
+    return fromEvent(this.el, 'paste').pipe(
+      tap((e: ClipboardEvent) => e.preventDefault()),
+      map((e: ClipboardEvent) => e.clipboardData?.getData('text/plain') || '')
+    );
   }
 
-  private onDrop(): void {
-    fromEvent(this.el, 'drop').pipe(
-      takeUntil(this.destroy$),
-      tap((e: DragEvent) => this.parseValue(e.dataTransfer?.getData('text') || '')),
-      tap((e: DragEvent) => e.preventDefault())
-    ).subscribe();
+  private onDrop(): Observable<string> {
+    return fromEvent(this.el, 'drop').pipe(
+      tap((e: DragEvent) => e.preventDefault()),
+      map((e: DragEvent) => e.dataTransfer?.getData('text') || '')
+    );
   }
 
   private onKeyDown(): void {
-    fromEvent(this.el, 'keydown').pipe(
-      takeUntil(this.destroy$),
-      tap((e: KeyboardEvent) => {
-        const key: string = getKeyName(e);
-        const allowedKeys = getAllowedKeys(e, this.decimalSeparator);
-        const actionKeys = ['a', 'c', 'v', 'x'];
-    
-        if (
-          allowedKeys.includes(key) ||
-          (actionKeys.includes(key) && isActionKey(e))
-        ) {
-          return;
-        }
-    
-        const isNumber = new RegExp(UNSIGNED_INTEGER_REGEX).test(key);
-        if (isNumber) {
-          return;
-        }
-    
-        e.preventDefault();
-      })
-    ).subscribe();
+    fromEvent(this.el, 'keydown')
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((e: KeyboardEvent) => {
+          if (isAllowedKey(e, this.decimalSeparator) || isNumberKey(e)) {
+            return;
+          }
+          e.preventDefault();
+        })
+      )
+      .subscribe();
+  }
+
+  private onValueChange(): void {
+    merge(this.onChange(), this.onDrop(), this.onPaste())
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => this.parseValue(value));
   }
 
   private get el(): HTMLInputElement {
