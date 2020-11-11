@@ -1,8 +1,26 @@
-export const UNSIGNED_INTEGER_REGEX = '^[0-9]*$';
-export const SIGNED_DOUBLE_REGEX = '^-?[0-9]+(.[0-9]+)?$';
-export const NUMBERS_REGEX = /\d/g;
+const UNSIGNED_INTEGER_REGEX = '^[0-9]*$';
+const SIGNED_DOUBLE_REGEX = '^-?[0-9]+(.[0-9]+)?$';
+const NUMBERS_REGEX = /\d/g;
 const actionKeys = ['a', 'c', 'v', 'x'];
 const defaultAllowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Escape', 'Tab'];
+
+export function overrideInputType(input: HTMLInputElement): void {
+  input.setAttribute('type', 'text');
+  input.setAttribute('inputmode', 'decimal');
+}
+
+export function parseValue(value: string, decimalSeparator: string): string {
+  value = replaceSeparator(value, decimalSeparator);
+  value = appendZeroToDecimal(value, decimalSeparator);
+  const isValid: boolean = new RegExp(SIGNED_DOUBLE_REGEX).test(value);
+  return isValid ? value : '0';
+}
+
+export function isAllowedKey(e: KeyboardEvent, decimalSeparator: string): boolean {
+  const key: string = getKeyName(e);
+  const allowedKeys = getAllowedKeys(e, decimalSeparator);
+  return allowedKeys.includes(key) || (actionKeys.includes(key) && isActionKey(e)) || isNumberKey(e);
+}
 
 /**
  * support for old browsers.
@@ -35,12 +53,12 @@ function mapKeyCodeToKeyName(keyCode: number): string {
   return '';
 }
 
-export function replaceSeparator(value: string, decimalSeparator: string): string {
+function replaceSeparator(value: string, decimalSeparator: string): string {
   const separator = value.replace('-', '').replace(NUMBERS_REGEX, '');
   return value.replace(separator || decimalSeparator, decimalSeparator);
 }
 
-export function appendZeroToDecimal(value: string, decimalSeparator: string): string {
+function appendZeroToDecimal(value: string, decimalSeparator: string): string {
   const firstCharacter = value.charAt(0);
   if (firstCharacter === decimalSeparator) {
     return 0 + value;
@@ -54,28 +72,19 @@ export function appendZeroToDecimal(value: string, decimalSeparator: string): st
   return value;
 }
 
-export function overrideInputType(input: HTMLInputElement): void {
-  input.setAttribute('type', 'text');
-  input.setAttribute('inputmode', 'decimal');
+function isActionKey(e: KeyboardEvent): boolean {
+  return e.ctrlKey || e.metaKey;
 }
 
-export function isNumberKey(e: KeyboardEvent): boolean {
+function getKeyName(e: KeyboardEvent): string {
+  return e.key || mapKeyCodeToKeyName(e.keyCode);
+}
+
+function isNumberKey(e: KeyboardEvent): boolean {
   const key = getKeyName(e);
   return new RegExp(UNSIGNED_INTEGER_REGEX).test(key);
 }
 
-export function isAllowedKey(e: KeyboardEvent, decimalSeparator: string): boolean {
-  const key: string = getKeyName(e);
-  const allowedKeys = getAllowedKeys(e, decimalSeparator);
-  return allowedKeys.includes(key) || (actionKeys.includes(key) && isActionKey(e));
-}
-
-function isActionKey(e: KeyboardEvent): boolean {
-  return e.ctrlKey || e.metaKey;
-}
-function getKeyName(e: KeyboardEvent): string {
-  return e.key || mapKeyCodeToKeyName(e.keyCode);
-}
 function getAllowedKeys(e: KeyboardEvent, decimalSeparator: string): string[] {
   const originalValue: string = (e.target as HTMLInputElement).value;
   const cursorPosition: number = (e.target as HTMLInputElement).selectionStart || 0;

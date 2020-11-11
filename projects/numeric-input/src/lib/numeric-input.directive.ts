@@ -3,14 +3,7 @@ import { NgControl } from '@angular/forms';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { LocaleService } from './locale.service';
-import {
-  appendZeroToDecimal,
-  isAllowedKey,
-  isNumberKey,
-  overrideInputType,
-  replaceSeparator,
-  SIGNED_DOUBLE_REGEX
-} from './numeric-input.utils';
+import { isAllowedKey, overrideInputType, parseValue } from './numeric-input.utils';
 
 @Directive({
   selector: '[dlNumericInput]'
@@ -36,15 +29,8 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
     this.destroy$.next();
   }
 
-  private parseValue(value: string): void {
-    value = replaceSeparator(value, this.decimalSeparator);
-    value = appendZeroToDecimal(value, this.decimalSeparator);
-    const isValid: boolean = new RegExp(SIGNED_DOUBLE_REGEX).test(value);
-    this.setValue(isValid ? value : '0');
-  }
-
   private setValue(value: string): void {
-    const formattedValue = Number(value.replace(this.decimalSeparator, '.'));
+    const formattedValue = Number(parseValue(value, this.decimalSeparator).replace(this.decimalSeparator, '.'));
     this.el.value = formattedValue.toString();
     if (this.control) {
       this.control.control?.patchValue(formattedValue);
@@ -74,7 +60,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         tap((e: KeyboardEvent) => {
-          if (isAllowedKey(e, this.decimalSeparator) || isNumberKey(e)) {
+          if (isAllowedKey(e, this.decimalSeparator)) {
             return;
           }
           e.preventDefault();
@@ -86,7 +72,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   private onValueChange(): void {
     merge(this.onChange(), this.onDrop(), this.onPaste())
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => this.parseValue(value));
+      .subscribe(value => this.setValue(value));
   }
 
   private get el(): HTMLInputElement {
