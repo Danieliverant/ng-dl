@@ -1,25 +1,58 @@
 const UNSIGNED_INTEGER_REGEX = '^[0-9]*$';
 const SIGNED_DOUBLE_REGEX = '^-?[0-9]+(.[0-9]+)?$';
 const NUMBERS_REGEX = /\d/g;
+const CHROME_MIN_VALIDATION_MESSAGE = 'Value must be greater than or equal to';
+const CHROME_MAX_VALIDATION_MESSAGE = 'Value must be less than or equal to';
 const actionKeys = ['a', 'c', 'v', 'x'];
-const defaultAllowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Escape', 'Tab'];
+const defaultAllowedKeys = [
+  'Backspace',
+  'ArrowLeft',
+  'ArrowRight',
+  'Escape',
+  'Tab',
+];
 
 export function overrideInputType(input: HTMLInputElement): void {
   input.setAttribute('type', 'text');
   input.setAttribute('inputmode', 'decimal');
+  input.removeAttribute('pattern');
 }
 
-export function parseValue(value: string, decimalSeparator: string): string {
-  value = replaceSeparator(value, decimalSeparator);
-  value = appendZeroToDecimal(value, decimalSeparator);
-  const isValid: boolean = new RegExp(SIGNED_DOUBLE_REGEX).test(value);
-  return isValid ? value : '0';
+export function getFormattedValue(value: string, decimalSeparator: string): number {
+  return Number(parseValue(value, decimalSeparator).replace(decimalSeparator, '.'));
 }
 
-export function isAllowedKey(e: KeyboardEvent, decimalSeparator: string): boolean {
+export function isAllowedKey(
+  e: KeyboardEvent,
+  decimalSeparator: string
+): boolean {
   const key: string = getKeyName(e);
   const allowedKeys = getAllowedKeys(e, decimalSeparator);
-  return allowedKeys.includes(key) || (actionKeys.includes(key) && isActionKey(e)) || isNumberKey(e);
+  return (
+    allowedKeys.includes(key) ||
+    (actionKeys.includes(key) && isActionKey(e)) ||
+    isNumberKey(e)
+  );
+}
+
+export function validate(
+  el: HTMLInputElement,
+  value: number,
+  min?: number,
+  max?: number
+): boolean {
+  if (value <= min) {
+    el.setCustomValidity(`${CHROME_MIN_VALIDATION_MESSAGE} ${min}.`);
+    return false;
+  }
+
+  if (value >= max) {
+    el.setCustomValidity(`${CHROME_MAX_VALIDATION_MESSAGE} ${max}.`);
+    return false;
+  }
+
+  el.setCustomValidity('');
+  return true;
 }
 
 /**
@@ -53,6 +86,13 @@ function mapKeyCodeToKeyName(keyCode: number): string {
   return '';
 }
 
+function parseValue(value: string, decimalSeparator: string): string {
+  value = replaceSeparator(value, decimalSeparator);
+  value = appendZeroToDecimal(value, decimalSeparator);
+  const isValid: boolean = new RegExp(SIGNED_DOUBLE_REGEX).test(value);
+  return isValid ? value : '0';
+}
+
 function replaceSeparator(value: string, decimalSeparator: string): string {
   const separator = value.replace('-', '').replace(NUMBERS_REGEX, '');
   return value.replace(separator || decimalSeparator, decimalSeparator);
@@ -76,7 +116,7 @@ function isActionKey(e: KeyboardEvent): boolean {
   return e.ctrlKey || e.metaKey;
 }
 
-function getKeyName(e: KeyboardEvent): string {
+export function getKeyName(e: KeyboardEvent): string {
   return e.key || mapKeyCodeToKeyName(e.keyCode);
 }
 
@@ -87,7 +127,8 @@ function isNumberKey(e: KeyboardEvent): boolean {
 
 function getAllowedKeys(e: KeyboardEvent, decimalSeparator: string): string[] {
   const originalValue: string = (e.target as HTMLInputElement).value;
-  const cursorPosition: number = (e.target as HTMLInputElement).selectionStart || 0;
+  const cursorPosition: number =
+    (e.target as HTMLInputElement).selectionStart || 0;
   const signExists = originalValue.includes('-');
   const separatorExists = originalValue.includes(decimalSeparator);
 
@@ -96,7 +137,8 @@ function getAllowedKeys(e: KeyboardEvent, decimalSeparator: string): string[] {
     defaultAllowedKeys.push(decimalSeparator);
   }
 
-  const firstCharacterIsSeparator = originalValue.charAt(0) === decimalSeparator;
+  const firstCharacterIsSeparator =
+    originalValue.charAt(0) === decimalSeparator;
   if (!signExists && !firstCharacterIsSeparator && cursorPosition === 0) {
     defaultAllowedKeys.push('-');
   }

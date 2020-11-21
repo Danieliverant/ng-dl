@@ -1,2 +1,15 @@
-<p>Numeric Input example:</p>
-<input placeholder="only numbers..." dlNumericInput type="date"/>
+<form>
+    <p>
+        <label>
+            Regular Input (type="number") example:
+            <input placeholder="only numbers..." required [min]="2" [max]="10" type="number"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Numeric Input (dlNumericInput) example:
+            <input placeholder="only numbers..." required [min]="2" [max]="10" dlNumericInput/>
+        </label>
+    </p>
+    <button type="submit">Submit</button>
+</form>

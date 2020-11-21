@@ -1,14 +1,17 @@
-import { AfterViewInit, Directive, ElementRef, OnDestroy, Optional } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Optional } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { LocaleService } from './locale.service';
-import { isAllowedKey, overrideInputType, parseValue } from './numeric-input.utils';
+import { getFormattedValue, isAllowedKey, overrideInputType, validate } from './numeric-input.utils';
 
 @Directive({
   selector: '[dlNumericInput]'
 })
 export class NumericInputDirective implements AfterViewInit, OnDestroy {
+  @Input() min: number;
+  @Input() max: number;
+
   private readonly decimalSeparator = this.localeService.getDecimalSeparator();
   private readonly destroy$ = new Subject();
 
@@ -22,6 +25,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
     overrideInputType(this.el);
 
     this.onKeyDown();
+    this.onFormSubmit();
     this.onValueChange();
   }
 
@@ -30,7 +34,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   }
 
   private setValue(value: string): void {
-    const formattedValue = Number(parseValue(value, this.decimalSeparator).replace(this.decimalSeparator, '.'));
+    const formattedValue = getFormattedValue(value, this.decimalSeparator);
     this.el.value = formattedValue.toString();
     if (this.control) {
       this.control.control?.patchValue(formattedValue);
@@ -60,10 +64,27 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         tap((e: KeyboardEvent) => {
+          this.el.setCustomValidity('');
           if (isAllowedKey(e, this.decimalSeparator)) {
             return;
           }
           e.preventDefault();
+        })
+      )
+      .subscribe();
+  }
+
+  private onFormSubmit(): void {
+    fromEvent(this.el.form, 'submit')
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((e) => {
+          const formattedValue = getFormattedValue(this.el.value, this.decimalSeparator);
+          const isValid = validate(this.el, formattedValue, this.min, this.max);
+          if (!isValid) {
+            e.preventDefault();
+            this.el.reportValidity();
+          }
         })
       )
       .subscribe();
