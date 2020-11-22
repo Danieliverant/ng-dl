@@ -41,12 +41,12 @@ export function validate(
   min?: number,
   max?: number
 ): boolean {
-  if (value <= min) {
+  if (value < min) {
     el.setCustomValidity(`${CHROME_MIN_VALIDATION_MESSAGE} ${min}.`);
     return false;
   }
 
-  if (value >= max) {
+  if (value > max) {
     el.setCustomValidity(`${CHROME_MAX_VALIDATION_MESSAGE} ${max}.`);
     return false;
   }
