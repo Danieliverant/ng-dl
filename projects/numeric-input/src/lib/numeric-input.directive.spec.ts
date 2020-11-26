@@ -4,17 +4,20 @@ import { NumericInputDirective } from './numeric-input.directive';
 
 describe('dlNumericInput', () => {
   let testFixture: ComponentFixture<TestComponent>;
-  const eventAlphabetic = new KeyboardEvent('keydown', { key: 'a', cancelable: true });
-  const eventNumeric = new KeyboardEvent('keydown', { key: '3', cancelable: true });
+  let eventAlphabetic: KeyboardEvent;
+  let eventNumeric: KeyboardEvent;
 
   afterEach(() => {
     testFixture = null;
   });
 
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent, NumericInputDirective]
     });
+    eventAlphabetic = new KeyboardEvent('keydown', { key: 'a', cancelable: true });
+    eventNumeric = new KeyboardEvent('keydown', { key: '3', cancelable: true });
   });
 
   it('should allow key - regular input', () => {
@@ -66,9 +69,9 @@ function createTestComponent(template: string): ComponentFixture<TestComponent> 
 
 function getInput(fixture: ComponentFixture<TestComponent>, applyDirective: boolean): HTMLInputElement {
   if (applyDirective) {
-    fixture = createTestComponent('<input id="test-input" dlNumericInput/>');
+    fixture = createTestComponent('<form><input id="test-input" dlNumericInput/></form>');
   } else {
-    fixture = createTestComponent('<input id="test-input"/>');
+    fixture = createTestComponent('<form><input id="test-input"/></form>');
   }
 
   const input: HTMLInputElement = (fixture.nativeElement as HTMLInputElement).querySelector('#test-input');

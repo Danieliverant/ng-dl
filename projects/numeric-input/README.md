@@ -39,9 +39,9 @@ import { NumericInputModule, NUMERIC_INPUT_LOCALE } from '@ng-dl/numeric-input';
 })
 export class AppModule { }
 ```
-Apply the directive:
+Apply the directive and use with native validations:
 ```html
-<input dlNumericInput/>
+<input dlNumericInput [min]="" [max]=""/>
 ```
 
 ## Contributing
