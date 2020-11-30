@@ -6,13 +6,12 @@ import { NUMERIC_INPUT_LOCALE } from './locale.tokens';
 })
 export class LocaleService {
 
-  constructor(@Inject(NUMERIC_INPUT_LOCALE) @Optional() private locale?: string) { }
+  constructor(@Inject(NUMERIC_INPUT_LOCALE) @Optional() private locales?: string | string[]) { }
 
-  public getDecimalSeparator(): string {
-    const locale = this.getLocale();
+  public getDecimalSeparators(): string[] {
+    const locales = this.getLocales();
     const options: Intl.NumberFormatOptions = { useGrouping: false };
-
-    return this.localizedToDecimalSeparator(this.localizeDecimal(1.1, locale, options));
+    return locales.map(locale => this.localizedToDecimalSeparator(this.localizeDecimal(1.1, locale, options)))
   }
 
   private localizedToDecimalSeparator(localizedParts: Intl.NumberFormatPart[]): string {
@@ -27,12 +26,12 @@ export class LocaleService {
     return navigator.languages ? navigator.languages[0] : navigator.language;
   }
 
-  private getLocale(): string {
+  private getLocales(): string[] {
     try {
-      const supportedLocales: string[] = Intl.NumberFormat.supportedLocalesOf(this.locale);
-      return supportedLocales[0];
+      const supportedLocales: string[] = Intl.NumberFormat.supportedLocalesOf(this.locales);
+      return supportedLocales;
     } catch {
-      return this.localeFromBrowser;
+      return [this.localeFromBrowser];
     }
   }
 

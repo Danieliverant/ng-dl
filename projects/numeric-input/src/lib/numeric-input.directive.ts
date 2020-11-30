@@ -12,7 +12,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   @Input() min: number;
   @Input() max: number;
 
-  private readonly decimalSeparator = this.localeService.getDecimalSeparator();
+  private readonly decimalSeparators = this.localeService.getDecimalSeparators();
   private readonly destroy$ = new Subject();
 
   constructor(
@@ -65,7 +65,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
         takeUntil(this.destroy$),
         tap((e: KeyboardEvent) => {
           this.el.setCustomValidity('');
-          if (isAllowedKey(e, this.decimalSeparator)) {
+          if (isAllowedKey(e, this.decimalSeparators)) {
             return;
           }
           e.preventDefault();
@@ -98,5 +98,9 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
 
   private get el(): HTMLInputElement {
     return this.hostElement.nativeElement;
+  }
+
+  private get decimalSeparator(): string {
+    return this.decimalSeparators[0];
   }
 }

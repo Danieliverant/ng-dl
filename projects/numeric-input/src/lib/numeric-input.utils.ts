@@ -18,16 +18,21 @@ export function overrideInputType(input: HTMLInputElement): void {
   input.removeAttribute('pattern');
 }
 
-export function getFormattedValue(value: string, decimalSeparator: string): number {
-  return Number(parseValue(value, decimalSeparator).replace(decimalSeparator, '.'));
+export function getFormattedValue(
+  value: string,
+  decimalSeparator: string
+): number {
+  return Number(
+    parseValue(value, decimalSeparator).replace(decimalSeparator, '.')
+  );
 }
 
 export function isAllowedKey(
   e: KeyboardEvent,
-  decimalSeparator: string
+  decimalSeparators: string[]
 ): boolean {
   const key: string = getKeyName(e);
-  const allowedKeys = getAllowedKeys(e, decimalSeparator);
+  const allowedKeys = getAllowedKeys(e, decimalSeparators);
   return (
     allowedKeys.includes(key) ||
     (actionKeys.includes(key) && isActionKey(e)) ||
@@ -125,20 +130,27 @@ function isNumberKey(e: KeyboardEvent): boolean {
   return new RegExp(UNSIGNED_INTEGER_REGEX).test(key);
 }
 
-function getAllowedKeys(e: KeyboardEvent, decimalSeparator: string): string[] {
+function getAllowedKeys(
+  e: KeyboardEvent,
+  decimalSeparators: string[]
+): string[] {
   const originalValue: string = (e.target as HTMLInputElement).value;
   const cursorPosition: number =
     (e.target as HTMLInputElement).selectionStart || 0;
   const signExists = originalValue.includes('-');
-  const separatorExists = originalValue.includes(decimalSeparator);
+  const separatorExists = decimalSeparators.some((separator) =>
+    originalValue.includes(separator)
+  );
 
   const separatorIsCloseToSign = signExists && cursorPosition <= 1;
   if (!separatorIsCloseToSign && !separatorExists) {
-    defaultAllowedKeys.push(decimalSeparator);
+    defaultAllowedKeys.push(...decimalSeparators);
   }
 
-  const firstCharacterIsSeparator =
-    originalValue.charAt(0) === decimalSeparator;
+  const firstCharacterIsSeparator = decimalSeparators.some(
+    (separator) => originalValue.charAt(0) === separator
+  );
+  
   if (!signExists && !firstCharacterIsSeparator && cursorPosition === 0) {
     defaultAllowedKeys.push('-');
   }
