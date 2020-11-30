@@ -35,20 +35,21 @@ import { NumericInputModule, NUMERIC_INPUT_LOCALE } from '@ng-dl/numeric-input';
 @NgModule({
   ...,
   imports: [..., NumericInputModule],
-  providers: [{ 
+  providers: [..., 
+               { 
                 provide: NUMERIC_INPUT_LOCALE, 
                 useValue: 'my-locale' | ['array-of-locales']
-             }]
+               }
+             ]
 })
 export class AppModule { }
 ```
 
-##### NOTICE:
+#### NOTICE:
 
-###### NUMERIC_INPUT_LOCALE accepts an array of locales to support multiple decimal separators.
-###### To enable comma and a dot, for example, we can provide ['nl-nl', 'en-us'].
-###### For formatting the first locale will be used.
-###### &nbsp;
+> NUMERIC_INPUT_LOCALE accepts an array of locales to support multiple decimal separators - to enable comma and a dot, for example, we can provide ['nl-nl', 'en-us'].
+
+> For formatting the first locale will be used.
 
 #### Apply the directive:
 ```html
@@ -66,7 +67,9 @@ Name | Description | Example
 
 ## Contributing
 Pull requests are welcome. Suggestions are welcome.
+
 For major changes, please open an issue first to discuss what you would like to change.
+
 Please make sure to update tests as appropriate.
 
 ## License
