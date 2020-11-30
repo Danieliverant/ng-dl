@@ -35,20 +35,38 @@ import { NumericInputModule, NUMERIC_INPUT_LOCALE } from '@ng-dl/numeric-input';
 @NgModule({
   ...,
   imports: [..., NumericInputModule],
-  providers: [{ provide: NUMERIC_INPUT_LOCALE, useValue: 'custom-locale' }]
+  providers: [{ 
+                provide: NUMERIC_INPUT_LOCALE, 
+                useValue: 'my-locale' | ['array-of-locales']
+             }]
 })
 export class AppModule { }
 ```
-Apply the directive and use with native validations:
+
+##### NOTICE:
+
+###### NUMERIC_INPUT_LOCALE accepts an array of locales to suuport multiple decimal separators.
+###### To enable comma and a dot, for example, we can provide ['nl-nl', 'en-us'].
+###### For formatting the first locale will be used.
+###### &nbsp;
+
+#### Apply the directive:
 ```html
-<input dlNumericInput [min]="" [max]=""/>
+<input dlNumericInput/>
 ```
+
+### Properties:
+
+Name | Description | Example
+------------ | ------------- | -------------
+`@Input() min: number` | The minumum valid value | 1
+`@Input() max: number` | The maximum valid value | 100
+`@Output() localized: EventEmitter<string>` | localized number as a string | '١٢٣٫٤٥'
+
 
 ## Contributing
 Pull requests are welcome. Suggestions are welcome.
-
 For major changes, please open an issue first to discuss what you would like to change.
-
 Please make sure to update tests as appropriate.
 
 ## License

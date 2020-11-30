@@ -25,7 +25,7 @@ import {
 export class NumericInputDirective implements AfterViewInit, OnDestroy {
   @Input() min: number;
   @Input() max: number;
-  @Output() localized$ = new EventEmitter<string>();
+  @Output() localized = new EventEmitter<string>();
 
   private readonly decimalSeparators = this.localeService.getDecimalSeparators();
   private readonly destroy$ = new Subject();
@@ -51,7 +51,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   private setValue(value: string): void {
     const formattedValue = getFormattedValue(value, this.decimalSeparator);
 
-    this.localized$.emit(this.localeService.localizeNumber(formattedValue));
+    this.localized.emit(this.localeService.localizeNumber(formattedValue));
     this.el.value = formattedValue.toString();
     console.log(formattedValue);
     if (this.control) {
