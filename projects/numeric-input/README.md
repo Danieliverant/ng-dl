@@ -45,7 +45,7 @@ export class AppModule { }
 
 ##### NOTICE:
 
-###### NUMERIC_INPUT_LOCALE accepts an array of locales to suuport multiple decimal separators.
+###### NUMERIC_INPUT_LOCALE accepts an array of locales to support multiple decimal separators.
 ###### To enable comma and a dot, for example, we can provide ['nl-nl', 'en-us'].
 ###### For formatting the first locale will be used.
 ###### &nbsp;
