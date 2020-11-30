@@ -15,7 +15,7 @@ export class LocaleService {
   }
 
   public localizeNumber(value: number): string {
-    return value.toLocaleString(this.locales);
+    return value.toLocaleString(this.locales || []);
   }
 
   private localizedToDecimalSeparator(localizedParts: Intl.NumberFormatPart[]): string {

@@ -53,7 +53,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
 
     this.localized$.emit(this.localeService.localizeNumber(formattedValue));
     this.el.value = formattedValue.toString();
-
+    console.log(formattedValue);
     if (this.control) {
       this.control.control?.patchValue(formattedValue);
     }
