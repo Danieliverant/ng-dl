@@ -62,7 +62,7 @@ Name | Description | Example
 ------------ | ------------- | -------------
 `@Input() min: number` | The minumum valid value | 1
 `@Input() max: number` | The maximum valid value | 100
-`@Output() localized: EventEmitter<string>` | localized number as a string | '١٢٣٫٤٥'
+`@Output() localized: EventEmitter<string>` | Localized number as a string | '١٢٣٫٤٥'
 
 
 ## Contributing
