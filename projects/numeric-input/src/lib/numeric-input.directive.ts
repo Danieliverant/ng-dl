@@ -1,16 +1,31 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Optional } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Optional,
+  Output,
+} from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { LocaleService } from './locale.service';
-import { getFormattedValue, isAllowedKey, overrideInputType, validate } from './numeric-input.utils';
+import {
+  getFormattedValue,
+  isAllowedKey,
+  overrideInputType,
+  validate,
+} from './numeric-input.utils';
 
 @Directive({
-  selector: '[dlNumericInput]'
+  selector: '[dlNumericInput]',
 })
 export class NumericInputDirective implements AfterViewInit, OnDestroy {
   @Input() min: number;
   @Input() max: number;
+  @Output() localized$ = new EventEmitter<string>();
 
   private readonly decimalSeparators = this.localeService.getDecimalSeparators();
   private readonly destroy$ = new Subject();
@@ -35,7 +50,10 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
 
   private setValue(value: string): void {
     const formattedValue = getFormattedValue(value, this.decimalSeparator);
+
+    this.localized$.emit(this.localeService.localizeNumber(formattedValue));
     this.el.value = formattedValue.toString();
+
     if (this.control) {
       this.control.control?.patchValue(formattedValue);
     }
@@ -79,7 +97,10 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         tap((e) => {
-          const formattedValue = getFormattedValue(this.el.value, this.decimalSeparator);
+          const formattedValue = getFormattedValue(
+            this.el.value,
+            this.decimalSeparator
+          );
           const isValid = validate(this.el, formattedValue, this.min, this.max);
           if (!isValid) {
             e.preventDefault();
@@ -93,7 +114,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   private onValueChange(): void {
     merge(this.onChange(), this.onDrop(), this.onPaste())
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => this.setValue(value));
+      .subscribe((value) => this.setValue(value));
   }
 
   private get el(): HTMLInputElement {

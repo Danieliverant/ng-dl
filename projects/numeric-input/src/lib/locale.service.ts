@@ -14,6 +14,10 @@ export class LocaleService {
     return locales.map(locale => this.localizedToDecimalSeparator(this.localizeDecimal(1.1, locale, options)))
   }
 
+  public localizeNumber(value: number): string {
+    return value.toLocaleString(this.locales);
+  }
+
   private localizedToDecimalSeparator(localizedParts: Intl.NumberFormatPart[]): string {
     return localizedParts.find(part => part.type === 'decimal').value;
   }

@@ -12,7 +12,7 @@ import {
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, NumericInputModule],
-  providers: [{ provide: NUMERIC_INPUT_LOCALE, useValue: ['nl-nl', 'en-us'] }],
+  providers: [{ provide: NUMERIC_INPUT_LOCALE, useValue: ['ar-EG', 'en-us'] }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
