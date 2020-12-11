@@ -1,6 +1,9 @@
 # 🛡️ NG-DL
 
 Simple solutions for real problems in the web development world.
+
+[![build status](https://github.com/Danieliverant/ng-dl/workflows/Build/badge.svg)](https://https://github.com/Danieliverant/ng-dl)
+
 ## 👨‍💻 About Me
 
 My name is Daniel Liverant I'm a front-end developer mainly focused on Angular, 
