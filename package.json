@@ -7,13 +7,18 @@
     "build": "ng build",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "commit": "git-cz",
     "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "test:watch": "ng test",
-    "build-numeric-input": "ng build numeric-input --prod",
-    "publish-numeric-input": "cd dist/numeric-input && npm publish",
-    "install-numeric-input": "npm i @ng-dl/numeric-input@latest",
-    "build:ci": "npm run clean && npm run test && pack-numeric-input",
-    "pack-numeric-input": "npm run build-numeric-input && npm run publish-numeric-input && npm run install-numeric-input"
+    "travis-deploy-once": "travis-deploy-once --pro",
+    "semantic-release": "semantic-release",
+    "---numeric-input:commands---": "",
+    "lint:numeric-input": "ng lint numeric-input",
+    "test:numeric-input": "ng test numeric-input --watch=false --browsers=ChromeHeadlessCustom",
+    "build:numeric-input": "ng build numeric-input --prod",
+    "publish:numeric-input": "cd dist/numeric-input && npm publish",
+    "install:numeric-input": "npm i @ng-dl/numeric-input@latest",
+    "pack:numeric-input": "npm run build:numeric-input && npm run test:numeric-input && npm run publish:numeric-input && npm run install:numeric-input"
   },
   "author": {
     "name": "Daniel Liverant",
@@ -47,10 +52,14 @@
     "@angular-devkit/build-angular": "~0.1002.0",
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^4.3.5",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
@@ -61,8 +70,29 @@
     "ng-packagr": "^10.1.0",
     "protractor": "~7.0.0",
     "puppeteer": "^5.5.0",
+    "semantic-release": "^17.3.0",
+    "travis-deploy-once": "^5.0.11",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run lint-lib",
+      "commit-msg": "commitlint --edit"
+    }
+  },
+  "release": {
+    "pkgRoot": "dist/numeric-input"
   }
 }
