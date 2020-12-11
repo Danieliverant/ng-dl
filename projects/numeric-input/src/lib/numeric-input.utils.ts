@@ -20,10 +20,11 @@ export function overrideInputType(input: HTMLInputElement): void {
 
 export function getFormattedValue(
   value: string,
-  decimalSeparator: string
+  decimalSeparator: string,
+  thousandsSeparator: string
 ): number {
   return Number(
-    parseValue(value, decimalSeparator).replace(decimalSeparator, '.')
+    parseValue(value, decimalSeparator, thousandsSeparator).replace(decimalSeparator, '.')
   );
 }
 
@@ -91,14 +92,15 @@ function mapKeyCodeToKeyName(keyCode: number): string {
   return '';
 }
 
-function parseValue(value: string, decimalSeparator: string): string {
-  value = replaceSeparator(value, decimalSeparator);
+function parseValue(value: string, decimalSeparator: string, thousandSeparator: string): string {
+  value = replaceDecimalSeparator(value, decimalSeparator);
   value = appendZeroToDecimal(value, decimalSeparator);
+  value = removeThousandsSeparator(value, thousandSeparator);
   const isValid: boolean = new RegExp(SIGNED_DOUBLE_REGEX).test(value);
   return isValid ? value : '0';
 }
 
-function replaceSeparator(value: string, decimalSeparator: string): string {
+function replaceDecimalSeparator(value: string, decimalSeparator: string): string {
   const separator = value.replace('-', '').replace(NUMBERS_REGEX, '');
   return value.replace(separator || decimalSeparator, decimalSeparator);
 }
@@ -117,11 +119,15 @@ function appendZeroToDecimal(value: string, decimalSeparator: string): string {
   return value;
 }
 
+function removeThousandsSeparator(value: string, thousandsSeparator: string): string {
+  return value.replace(thousandsSeparator, '');
+}
+
 function isActionKey(e: KeyboardEvent): boolean {
   return e.ctrlKey || e.metaKey;
 }
 
-export function getKeyName(e: KeyboardEvent): string {
+function getKeyName(e: KeyboardEvent): string {
   return e.key || mapKeyCodeToKeyName(e.keyCode);
 }
 
@@ -150,7 +156,7 @@ function getAllowedKeys(
   const firstCharacterIsSeparator = decimalSeparators.some(
     (separator) => originalValue.charAt(0) === separator
   );
-  
+
   if (!signExists && !firstCharacterIsSeparator && cursorPosition === 0) {
     defaultAllowedKeys.push('-');
   }

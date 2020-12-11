@@ -11,7 +11,13 @@ export class LocaleService {
   public getDecimalSeparators(): string[] {
     const locales = this.getLocales();
     const options: Intl.NumberFormatOptions = { useGrouping: false };
-    return locales.map(locale => this.localizedToDecimalSeparator(this.localizeDecimal(1.1, locale, options)))
+    return locales.map(locale => this.localizedToDecimalSeparator(this.localizeDecimal(1.1, locale, options)));
+  }
+
+  public getThousandSeparators(): string[] {
+    const locales = this.getLocales();
+    const options: Intl.NumberFormatOptions = { useGrouping: true };
+    return locales.map(locale => this.localizedToThousandSeparator(this.localizeDecimal(1234.5, locale, options)));
   }
 
   public localizeNumber(value: number): string {
@@ -20,6 +26,10 @@ export class LocaleService {
 
   private localizedToDecimalSeparator(localizedParts: Intl.NumberFormatPart[]): string {
     return localizedParts.find(part => part.type === 'decimal').value;
+  }
+
+  private localizedToThousandSeparator(localizedParts: Intl.NumberFormatPart[]): string {
+    return localizedParts.find(part => part.type === 'group').value;
   }
 
   private localizeDecimal(value: number, locale: string, options?: Intl.NumberFormatOptions): Intl.NumberFormatPart[] {

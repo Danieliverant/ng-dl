@@ -28,6 +28,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   @Output() localized = new EventEmitter<string>();
 
   private readonly decimalSeparators = this.localeService.getDecimalSeparators();
+  private readonly thousandSeparators = this.localeService.getThousandSeparators();
   private readonly destroy$ = new Subject();
 
   constructor(
@@ -38,7 +39,6 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     overrideInputType(this.el);
-
     this.onKeyDown();
     this.onFormSubmit();
     this.onValueChange();
@@ -49,8 +49,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
   }
 
   private setValue(value: string): void {
-    const formattedValue = getFormattedValue(value, this.decimalSeparator);
-
+    const formattedValue = getFormattedValue(value, this.decimalSeparator, this.thousandsSeparator);
     this.localized.emit(this.localeService.localizeNumber(formattedValue));
     this.el.value = formattedValue.toString();
     console.log(formattedValue);
@@ -99,7 +98,8 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
         tap((e) => {
           const formattedValue = getFormattedValue(
             this.el.value,
-            this.decimalSeparator
+            this.decimalSeparator,
+            this.thousandsSeparator
           );
           const isValid = validate(this.el, formattedValue, this.min, this.max);
           if (!isValid) {
@@ -123,5 +123,9 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
 
   private get decimalSeparator(): string {
     return this.decimalSeparators[0];
+  }
+
+  private get thousandsSeparator(): string {
+    return this.thousandSeparators[0];
   }
 }
