@@ -13,6 +13,7 @@ const defaultAllowedKeys = [
 ];
 
 export function overrideInputType(input: HTMLInputElement): void {
+  // checking new ci.
   input.setAttribute('type', 'text');
   input.setAttribute('inputmode', 'decimal');
   input.removeAttribute('pattern');
