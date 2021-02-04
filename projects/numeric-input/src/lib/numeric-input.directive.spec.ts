@@ -11,7 +11,6 @@ describe('dlNumericInput', () => {
     testFixture = null;
   });
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent, NumericInputDirective]
