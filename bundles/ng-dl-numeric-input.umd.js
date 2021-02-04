@@ -368,30 +368,54 @@
     var NUMBERS_REGEX = /\d/g;
     var CHROME_MIN_VALIDATION_MESSAGE = 'Value must be greater than or equal to';
     var CHROME_MAX_VALIDATION_MESSAGE = 'Value must be less than or equal to';
-    var actionKeys = ['a', 'c', 'v', 'x'];
-    var defaultAllowedKeys = [
+    var DEFAULT_NUMERIC_VALUE = 0;
+    var DEFAULT_ACTION_KEYS = ['a', 'c', 'v', 'x'];
+    var DEFAULT_ALLOWED_KEYS = [
         'Backspace',
         'ArrowLeft',
         'ArrowRight',
         'Escape',
         'Tab',
     ];
+    /**
+     * Override input attributes for validation and mobile support.
+     * @param input - input element
+     */
     function overrideInputType(input) {
-        // checking new ci.
         input.setAttribute('type', 'text');
         input.setAttribute('inputmode', 'decimal');
         input.removeAttribute('pattern');
     }
+    /**
+     * Get formatted value, if the value is a valid numeric value it will be formatted if not a default value will be returned.
+     * @param value - value to format.
+     * @param decimalSeparator - decimal separator to replace (if needed).
+     * @param thousandsSeparator - thousands separator to remove (if needed).
+     */
     function getFormattedValue(value, decimalSeparator, thousandsSeparator) {
-        return Number(parseValue(value, decimalSeparator, thousandsSeparator).replace(decimalSeparator, '.'));
+        var formatted = Number(parseValue(value, decimalSeparator, thousandsSeparator).replace(decimalSeparator, '.'));
+        return isNaN(formatted) ? DEFAULT_NUMERIC_VALUE : formatted;
     }
+    /**
+     * Check if the pressed key is allowed in the numeric input field.
+     * @param e - keyboard event.
+     * @param decimalSeparators - array of supported separators.
+     */
     function isAllowedKey(e, decimalSeparators) {
         var key = getKeyName(e);
         var allowedKeys = getAllowedKeys(e, decimalSeparators);
         return (allowedKeys.includes(key) ||
-            (actionKeys.includes(key) && isActionKey(e)) ||
+            (DEFAULT_ACTION_KEYS.includes(key) && isActionKey(e)) ||
             isNumberKey(e));
     }
+    /**
+     * Align all browsers to validate as same as Chrome browser does.
+     * Validation will be after the field loose focus and with Chrome default messages.
+     * @param el - input element.
+     * @param value - input value.
+     * @param min - minimum valid value.
+     * @param max - maximum valid value.
+     */
     function validate(el, value, min, max) {
         if (value < min) {
             el.setCustomValidity(CHROME_MIN_VALIDATION_MESSAGE + " " + min + ".");
@@ -434,12 +458,19 @@
         }
         return '';
     }
+    /**
+     * Add zero to decimal values, replaces the decimal separator and remove the thousand separator.
+     * If the value is a numeric value the parsed value will be returned, if not - the default numeric value.
+     * @param value - value to parse.
+     * @param decimalSeparator - decimal separator to replace (if needed).
+     * @param thousandsSeparator - thousands separator to remove (if needed).
+     */
     function parseValue(value, decimalSeparator, thousandSeparator) {
         value = replaceDecimalSeparator(value, decimalSeparator);
         value = appendZeroToDecimal(value, decimalSeparator);
         value = removeThousandsSeparator(value, thousandSeparator);
         var isValid = new RegExp(SIGNED_DOUBLE_REGEX).test(value);
-        return isValid ? value : '0';
+        return isValid ? value : DEFAULT_NUMERIC_VALUE.toString();
     }
     function replaceDecimalSeparator(value, decimalSeparator) {
         var separator = value.replace('-', '').replace(NUMBERS_REGEX, '');
@@ -470,19 +501,20 @@
         return new RegExp(UNSIGNED_INTEGER_REGEX).test(key);
     }
     function getAllowedKeys(e, decimalSeparators) {
+        var allowedKeys = __spread(DEFAULT_ALLOWED_KEYS);
         var originalValue = e.target.value;
         var cursorPosition = e.target.selectionStart || 0;
         var signExists = originalValue.includes('-');
         var separatorExists = decimalSeparators.some(function (separator) { return originalValue.includes(separator); });
         var separatorIsCloseToSign = signExists && cursorPosition <= 1;
         if (!separatorIsCloseToSign && !separatorExists) {
-            defaultAllowedKeys.push.apply(defaultAllowedKeys, __spread(decimalSeparators));
+            allowedKeys.push.apply(allowedKeys, __spread(decimalSeparators));
         }
         var firstCharacterIsSeparator = decimalSeparators.some(function (separator) { return originalValue.charAt(0) === separator; });
         if (!signExists && !firstCharacterIsSeparator && cursorPosition === 0) {
-            defaultAllowedKeys.push('-');
+            allowedKeys.push('-');
         }
-        return defaultAllowedKeys;
+        return allowedKeys;
     }
 
     var NumericInputDirective = /** @class */ (function () {
@@ -509,7 +541,6 @@
             var formattedValue = getFormattedValue(value, this.decimalSeparator, this.thousandsSeparator);
             this.localized.emit(this.localeService.localizeNumber(formattedValue));
             this.el.value = formattedValue.toString();
-            console.log(formattedValue);
             if (this.control) {
                 (_a = this.control.control) === null || _a === void 0 ? void 0 : _a.patchValue(formattedValue);
             }
