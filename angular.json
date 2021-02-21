@@ -163,6 +163,46 @@
           }
         }
       }
+    },
+    "delayed-dragover": {
+      "projectType": "library",
+      "root": "projects/delayed-dragover",
+      "sourceRoot": "projects/delayed-dragover/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/delayed-dragover/tsconfig.lib.json",
+            "project": "projects/delayed-dragover/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/delayed-dragover/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/delayed-dragover/src/test.ts",
+            "tsConfig": "projects/delayed-dragover/tsconfig.spec.json",
+            "karmaConfig": "projects/delayed-dragover/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/delayed-dragover/tsconfig.lib.json",
+              "projects/delayed-dragover/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ng-dl"
 }

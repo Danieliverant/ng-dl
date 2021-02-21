@@ -20,6 +20,10 @@
       "numeric-input": [
         "dist/numeric-input/numeric-input",
         "dist/numeric-input"
+      ],
+      "delayed-dragover": [
+        "dist/delayed-dragover/delayed-dragover",
+        "dist/delayed-dragover"
       ]
     }
   }

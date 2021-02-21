@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 //   NumericInputModule,
 // } from 'projects/numeric-input/src/public-api';
 import { NumericInputModule, NUMERIC_INPUT_LOCALE } from '@ng-dl/numeric-input';
+import { DelayedDragoverModule } from 'projects/delayed-dragover/src/public-api';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, NumericInputModule],
-  providers: [{ provide: NUMERIC_INPUT_LOCALE, useValue: ['en-us'] }],
+  imports: [BrowserModule, AppRoutingModule, NumericInputModule, DelayedDragoverModule],
+  providers: [{provide: NUMERIC_INPUT_LOCALE, useValue: ['en-us']}],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
