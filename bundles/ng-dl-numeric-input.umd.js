@@ -611,7 +611,6 @@
     }());
     NumericInputDirective.decorators = [
         { type: i0.Directive, args: [{
-                    // tslint:disable-next-line
                     selector: '[dlNumericInput]',
                 },] }
     ];

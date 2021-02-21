@@ -285,7 +285,6 @@ class NumericInputDirective {
 }
 NumericInputDirective.decorators = [
     { type: Directive, args: [{
-                // tslint:disable-next-line
                 selector: '[dlNumericInput]',
             },] }
 ];
