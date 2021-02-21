@@ -20,7 +20,6 @@ import {
 } from './numeric-input.utils';
 
 @Directive({
-  // tslint:disable-next-line
   selector: '[dlNumericInput]',
 })
 export class NumericInputDirective implements AfterViewInit, OnDestroy {

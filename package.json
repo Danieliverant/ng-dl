@@ -1,6 +1,6 @@
 {
   "name": "ng-dl",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -18,7 +18,14 @@
     "build:numeric-input": "ng build numeric-input --prod",
     "publish:numeric-input": "cd dist/numeric-input && npm publish",
     "install:numeric-input": "npm i @ng-dl/numeric-input@latest",
-    "pack:numeric-input": "npm run build:numeric-input && npm run test:numeric-input && npm run publish:numeric-input && npm run install:numeric-input"
+    "pack:numeric-input": "npm run build:numeric-input && npm run test:numeric-input && npm run publish:numeric-input && npm run install:numeric-input",
+    "---delayed-dragover:commands---": "",
+    "lint:delayed-dragover": "ng lint delayed-dragover",
+    "test:delayed-dragover": "ng test delayed-dragover --watch=false --browsers=ChromeHeadlessCustom",
+    "build:delayed-dragover": "ng build delayed-dragover --prod",
+    "publish:delayed-dragover": "cd dist/delayed-dragover && npm publish",
+    "install:delayed-dragover": "npm i @ng-dl/delayed-dragover@latest",
+    "pack:delayed-dragover": "npm run build:delayed-dragover && npm run publish:delayed-dragover && npm run install:delayed-dragover"
   },
   "author": {
     "name": "Daniel Liverant",
@@ -43,7 +50,9 @@
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
+    "@ng-dl/delayed-dragover": "0.0.1",
     "@ng-dl/numeric-input": "^1.0.5",
+    "multi-semantic-release": "^2.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -70,7 +79,7 @@
     "ng-packagr": "^10.1.0",
     "protractor": "~7.0.0",
     "puppeteer": "^5.5.0",
-    "semantic-release": "^17.3.0",
+    "semantic-release": "^17.3.9",
     "travis-deploy-once": "^5.0.11",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
@@ -88,11 +97,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run lint:numeric-input",
+      "pre-commit": "npm run lint && npm run lint:numeric-input && npm run lint:delayed-dragover",
       "commit-msg": "commitlint --edit"
     }
   },
-  "release": {
-    "pkgRoot": "dist/numeric-input"
+  "publishConfig": {
+    "access": "public"
   }
 }

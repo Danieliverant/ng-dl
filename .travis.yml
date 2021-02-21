@@ -10,7 +10,10 @@ cache:
     - $HOME/.npm
 script:
   - npm run lint:numeric-input
-  - npm run build:numeric-input && npm run build
+  - npm run build:numeric-input
+  - npm run lint:delayed-dragover
+  - npm run build:delayed-dragover
+  - npm run build
 
 deploy:
   provider: pages

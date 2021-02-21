@@ -1,20 +1,20 @@
 {
-  "name": "@ng-dl/numeric-input",
+  "name": "@ng-dl/delayed-dragover",
   "version": "2.0.0",
-  "description": "override browser's default behavior & localization on numeric inputs",
+  "description": "Delay for dragover event and cross-device compatibility",
   "author": {
     "name": "Daniel Liverant",
     "email": "liverant95@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Danieliverant/ng-dl/tree/master/projects/numeric-input"
+    "url": "https://github.com/Danieliverant/ng-dl/tree/master/projects/delayed-dragover"
   },
   "bugs": {
     "url": "https://github.com/Danieliverant/ng-dl/issues"
   },
   "homepage": "https://github.com/Danieliverant/ng-dl",
-  "keywords": ["angular", "directive", "localization", "input"],
+  "keywords": ["angular", "directive", "drag", "dragndrop", "drag&drop", "delay", "delayed"],
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^10.2.0",
@@ -24,7 +24,7 @@
     "tslib": "^2.0.0"
   },
   "release": {
-    "pkgRoot": "dist/numeric-input"
+    "pkgRoot": "dist/delayed-dragover"
   },
   "publishConfig": {
     "access": "public"
