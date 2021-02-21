@@ -93,6 +93,6 @@
     }
   },
   "release": {
-    "pkgRoot": "dist/numeric-input"
+    "pkgRoot": "dist"
   }
 }
