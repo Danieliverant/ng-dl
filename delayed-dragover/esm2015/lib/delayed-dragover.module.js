@@ -1,0 +1,13 @@
+import { NgModule } from '@angular/core';
+import { DelayedDragoverComponent } from './delayed-dragover.component';
+import { DelayedDragoverDirective } from './delayed-dragover.directive';
+export class DelayedDragoverModule {
+}
+DelayedDragoverModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [DelayedDragoverComponent, DelayedDragoverDirective],
+                imports: [],
+                exports: [DelayedDragoverComponent, DelayedDragoverDirective]
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVsYXllZC1kcmFnb3Zlci5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiL2hvbWUvdHJhdmlzL2J1aWxkL0RhbmllbGl2ZXJhbnQvbmctZGwvcHJvamVjdHMvZGVsYXllZC1kcmFnb3Zlci9zcmMvIiwic291cmNlcyI6WyJsaWIvZGVsYXllZC1kcmFnb3Zlci5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUUsd0JBQXdCLEVBQUUsTUFBTSw4QkFBOEIsQ0FBQztBQUN4RSxPQUFPLEVBQUUsd0JBQXdCLEVBQUUsTUFBTSw4QkFBOEIsQ0FBQztBQU94RSxNQUFNLE9BQU8scUJBQXFCOzs7WUFMakMsUUFBUSxTQUFDO2dCQUNSLFlBQVksRUFBRSxDQUFDLHdCQUF3QixFQUFFLHdCQUF3QixDQUFDO2dCQUNsRSxPQUFPLEVBQUUsRUFBRTtnQkFDWCxPQUFPLEVBQUUsQ0FBQyx3QkFBd0IsRUFBRSx3QkFBd0IsQ0FBQzthQUM5RCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBEZWxheWVkRHJhZ292ZXJDb21wb25lbnQgfSBmcm9tICcuL2RlbGF5ZWQtZHJhZ292ZXIuY29tcG9uZW50JztcbmltcG9ydCB7IERlbGF5ZWREcmFnb3ZlckRpcmVjdGl2ZSB9IGZyb20gJy4vZGVsYXllZC1kcmFnb3Zlci5kaXJlY3RpdmUnO1xuXG5ATmdNb2R1bGUoe1xuICBkZWNsYXJhdGlvbnM6IFtEZWxheWVkRHJhZ292ZXJDb21wb25lbnQsIERlbGF5ZWREcmFnb3ZlckRpcmVjdGl2ZV0sXG4gIGltcG9ydHM6IFtdLFxuICBleHBvcnRzOiBbRGVsYXllZERyYWdvdmVyQ29tcG9uZW50LCBEZWxheWVkRHJhZ292ZXJEaXJlY3RpdmVdXG59KVxuZXhwb3J0IGNsYXNzIERlbGF5ZWREcmFnb3Zlck1vZHVsZSB7XG59XG4iXX0=

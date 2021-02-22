@@ -1,0 +1,42 @@
+{
+  "name": "@ng-dl/delayed-dragover",
+  "version": "0.0.0-semantically-released",
+  "description": "Delay for dragover event and cross-device compatibility",
+  "author": {
+    "name": "Daniel Liverant",
+    "email": "liverant95@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Danieliverant/ng-dl/tree/master/projects/delayed-dragover"
+  },
+  "bugs": {
+    "url": "https://github.com/Danieliverant/ng-dl/issues"
+  },
+  "homepage": "https://github.com/Danieliverant/ng-dl",
+  "keywords": [
+    "angular",
+    "directive",
+    "drag",
+    "dragndrop",
+    "drag&drop",
+    "delay",
+    "delayed"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^10.2.0",
+    "@angular/core": "^10.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "bundles/ng-dl-delayed-dragover.umd.js",
+  "module": "fesm2015/ng-dl-delayed-dragover.js",
+  "es2015": "fesm2015/ng-dl-delayed-dragover.js",
+  "esm2015": "esm2015/ng-dl-delayed-dragover.js",
+  "fesm2015": "fesm2015/ng-dl-delayed-dragover.js",
+  "typings": "ng-dl-delayed-dragover.d.ts",
+  "metadata": "ng-dl-delayed-dragover.metadata.json",
+  "sideEffects": false
+}
