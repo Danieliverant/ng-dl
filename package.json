@@ -101,6 +101,9 @@
     }
   },
   "release": {
-    "pkgRoot": "dist"
+    "pkgRoot": ["dist/numeric-input", "dist/delayed-dragover"]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
