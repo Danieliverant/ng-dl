@@ -31,6 +31,9 @@
   "dependencies": {
     "tslib": "^2.0.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "bundles/ng-dl-delayed-dragover.umd.js",
   "module": "fesm2015/ng-dl-delayed-dragover.js",
   "es2015": "fesm2015/ng-dl-delayed-dragover.js",
