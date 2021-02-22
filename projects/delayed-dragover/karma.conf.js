@@ -16,9 +16,15 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '../../coverage/delayed-dragover'),
+      dir: require('path').join(__dirname, '../../coverage/numeric-input'),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
+    },
+    customLaunchers: {
+      ChromeHeadlessCustom: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-gpu']
+      }
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,

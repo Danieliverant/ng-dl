@@ -10,14 +10,17 @@ cache:
     - $HOME/.npm
 script:
   - npm run lint:numeric-input
-  - npm run build:numeric-input && npm run build
+  - npm run build:numeric-input
+  - npm run lint:delayed-dragover
+  - npm run build:delayed-dragover
+  - npm run build
 
 deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
-  local-dir: dist/numeric-input
+  local-dir: dist
   on:
     branch: master
 
