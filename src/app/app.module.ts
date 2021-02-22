@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 //   NumericInputModule,
 // } from 'projects/numeric-input/src/public-api';
 import { NumericInputModule, NUMERIC_INPUT_LOCALE } from '@ng-dl/numeric-input';
-import { DelayedDragoverModule } from 'projects/delayed-dragover/src/public-api';
+// import { DelayedDragoverModule } from 'projects/delayed-dragover/src/public-api';
+import { DelayedDragoverModule } from '@ng-dl/delayed-dragover';
 
 @NgModule({
   declarations: [AppComponent],

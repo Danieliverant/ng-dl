@@ -101,9 +101,6 @@
       "commit-msg": "commitlint --edit"
     }
   },
-  "release": {
-    "pkgRoot": "dist"
-  },
   "publishConfig": {
     "access": "public"
   }
