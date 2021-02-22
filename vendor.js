@@ -63469,6 +63469,186 @@ const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('10.2.
 
 /***/ }),
 
+/***/ "uDXC":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/@ng-dl/delayed-dragover/__ivy_ngcc__/fesm2015/ng-dl-delayed-dragover.js ***!
+  \**********************************************************************************************/
+/*! exports provided: DelayedDragoverComponent, DelayedDragoverDirective, DelayedDragoverModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DelayedDragoverComponent", function() { return DelayedDragoverComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DelayedDragoverDirective", function() { return DelayedDragoverDirective; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DelayedDragoverModule", function() { return DelayedDragoverModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+
+
+
+
+
+const DEFAULT_TEXT = 'Hover Me';
+class DelayedDragoverComponent {
+    constructor() {
+        this.text = DEFAULT_TEXT;
+    }
+    changeText() {
+        this.text += ' - Hovered With Delay!';
+    }
+    changePreText() {
+        this.resetText();
+        this.text += ' - Hovered With Pre Delay!';
+    }
+    resetText() {
+        this.text = DEFAULT_TEXT;
+    }
+}
+DelayedDragoverComponent.ɵfac = function DelayedDragoverComponent_Factory(t) { return new (t || DelayedDragoverComponent)(); };
+DelayedDragoverComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DelayedDragoverComponent, selectors: [["dl-delayed-dragover"]], decls: 8, vars: 3, consts: [["dlDelayedDragover", "", 3, "dragoverDelayed", "dragleave"], ["dlDelayedDragover", "", 3, "dlDragoverDelayStep", "preDragoverDelayed", "dragoverDelayed", "dragleave"]], template: function DelayedDragoverComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h3");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Dragover for 1 second");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("dragoverDelayed", function DelayedDragoverComponent_Template_div_dragoverDelayed_2_listener() { return ctx.changeText(); })("dragleave", function DelayedDragoverComponent_Template_div_dragleave_2_listener() { return ctx.resetText(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "h3");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Dragover for 2 seconds see the pre-delayed and another second for the delay");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("preDragoverDelayed", function DelayedDragoverComponent_Template_div_preDragoverDelayed_6_listener() { return ctx.changePreText(); })("dragoverDelayed", function DelayedDragoverComponent_Template_div_dragoverDelayed_6_listener() { return ctx.changeText(); })("dragleave", function DelayedDragoverComponent_Template_div_dragleave_6_listener() { return ctx.resetText(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.text);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("dlDragoverDelayStep", 2000);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.text);
+    } }, directives: function () { return [DelayedDragoverDirective]; }, encapsulation: 2 });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DelayedDragoverComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'dl-delayed-dragover',
+                template: `
+    <h3>Dragover for 1 second</h3>
+    <div dlDelayedDragover (dragoverDelayed)="changeText()" (dragleave)="resetText()">{{ text }}</div>
+    <h3>Dragover for 2 seconds see the pre-delayed and another second for the delay</h3>
+    <div dlDelayedDragover [dlDragoverDelayStep]="2000" (preDragoverDelayed)="changePreText()"
+         (dragoverDelayed)="changeText()" (dragleave)="resetText()">{{ text }}</div>
+  `
+            }]
+    }], function () { return []; }, null); })();
+
+const DEFAULT_DRAG_OVER_CLASS = 'drag-over';
+const DEFAULT_DELAY = 1000;
+/**
+ * Delays the dragover event.
+ */
+class DelayedDragoverDirective {
+    constructor(element) {
+        this.element = element;
+        this.delay = DEFAULT_DELAY;
+        /**
+         * Delay before the dlDragoverDelay.
+         * Useful for letting the user change his mind after the first delay -
+         * i.e. hovering over paginator -> page number changes color -> page changes.
+         */
+        this.delayStep = 0;
+        this.dragoverDelayed = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        /**
+         * Emits if dlDragoverDelayStep is in use.
+         * Useful for letting the user change his mind after the first delay -
+         * i.e. hovering over paginator -> (preDragoverDelayed emits) page number changes color -> page changes.
+         */
+        this.preDragoverDelayed = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        // using counter to fix these issues:
+        // https://stackoverflow.com/questions/7110353/html5-dragleave-fired-when-hovering-a-child-element
+        // https://stackoverflow.com/questions/14203734/dragend-dragenter-and-dragleave-firing-off-immediately-when-i-drag
+        this.dragoverCounter = 0;
+    }
+    set class(value) {
+        this._class = value || DEFAULT_DRAG_OVER_CLASS;
+    }
+    get class() {
+        return this._class;
+    }
+    ngOnInit() {
+        const hide$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(this.element.nativeElement, 'dragleave').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(_ => this.dragoverCounter--));
+        const show$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(this.element.nativeElement, 'dragenter').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(_ => this.dragoverCounter++));
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["merge"])(hide$, show$)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => this.element.nativeElement.classList.remove(this.class)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(_ => {
+            if (this.dragoverCounter > 0) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["timer"])(this.delay).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => this.element.nativeElement.classList.add(this.class)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => this.delayStep && this.preDragoverDelayed.emit()), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["delay"])(this.delayStep));
+            }
+            return rxjs__WEBPACK_IMPORTED_MODULE_1__["EMPTY"];
+        }))
+            .subscribe(this.dragoverDelayed);
+    }
+}
+DelayedDragoverDirective.ɵfac = function DelayedDragoverDirective_Factory(t) { return new (t || DelayedDragoverDirective)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])); };
+DelayedDragoverDirective.ɵdir = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineDirective"]({ type: DelayedDragoverDirective, selectors: [["", "dlDelayedDragover", ""]], inputs: { delay: ["dlDragoverDelay", "delay"], delayStep: ["dlDragoverDelayStep", "delayStep"], class: ["dlDragover", "class"] }, outputs: { dragoverDelayed: "dragoverDelayed", preDragoverDelayed: "preDragoverDelayed" } });
+DelayedDragoverDirective.ctorParameters = () => [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }
+];
+DelayedDragoverDirective.propDecorators = {
+    class: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"], args: ['dlDragover',] }],
+    delay: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"], args: ['dlDragoverDelay',] }],
+    delayStep: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"], args: ['dlDragoverDelayStep',] }],
+    dragoverDelayed: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }],
+    preDragoverDelayed: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }]
+};
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DelayedDragoverDirective, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
+        args: [{
+                selector: '[dlDelayedDragover]'
+            }]
+    }], function () { return [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }]; }, { delay: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"],
+            args: ['dlDragoverDelay']
+        }], delayStep: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"],
+            args: ['dlDragoverDelayStep']
+        }], dragoverDelayed: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }], preDragoverDelayed: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }], class: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"],
+            args: ['dlDragover']
+        }] }); })();
+
+class DelayedDragoverModule {
+}
+DelayedDragoverModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: DelayedDragoverModule });
+DelayedDragoverModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function DelayedDragoverModule_Factory(t) { return new (t || DelayedDragoverModule)(); }, imports: [[]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](DelayedDragoverModule, { declarations: [DelayedDragoverComponent, DelayedDragoverDirective], exports: [DelayedDragoverComponent, DelayedDragoverDirective] }); })();
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DelayedDragoverModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
+        args: [{
+                declarations: [DelayedDragoverComponent, DelayedDragoverDirective],
+                imports: [],
+                exports: [DelayedDragoverComponent, DelayedDragoverDirective]
+            }]
+    }], null, null); })();
+
+/*
+ * Public API Surface of delayed-dragover
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+
+//# sourceMappingURL=ng-dl-delayed-dragover.js.map
+
+/***/ }),
+
 /***/ "uTdr":
 /*!****************************************************************************!*\
   !*** ./node_modules/rxjs/_esm2015/internal/operators/onErrorResumeNext.js ***!
