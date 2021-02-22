@@ -23,6 +23,9 @@
   "dependencies": {
     "tslib": "^2.0.0"
   },
+  "release": {
+    "pkgRoot": "dist/delayed-dragover"
+  },
   "publishConfig": {
     "access": "public"
   }
