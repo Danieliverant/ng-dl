@@ -11,7 +11,7 @@
     "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "test:watch": "ng test",
     "travis-deploy-once": "travis-deploy-once --pro",
-    "semantic-release": "semantic-release",
+    "semantic-release": "semantic-release -e semantic-release-monorepo",
     "---numeric-input:commands---": "",
     "lint:numeric-input": "ng lint numeric-input",
     "test:numeric-input": "ng test numeric-input --watch=false --browsers=ChromeHeadlessCustom",
@@ -78,7 +78,8 @@
     "ng-packagr": "^10.1.0",
     "protractor": "~7.0.0",
     "puppeteer": "^5.5.0",
-    "semantic-release": "^17.3.0",
+    "semantic-release": "^17.3.9",
+    "semantic-release-monorepo": "^7.0.4",
     "travis-deploy-once": "^5.0.11",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
@@ -101,7 +102,7 @@
     }
   },
   "release": {
-    "pkgRoot": ["dist/numeric-input", "dist/delayed-dragover"]
+    "pkgRoot": "dist"
   },
   "publishConfig": {
     "access": "public"
