@@ -101,6 +101,9 @@
       "commit-msg": "commitlint --edit"
     }
   },
+  "release": {
+    "pkgRoot": "dist/delayed-dragover"
+  },
   "publishConfig": {
     "access": "public"
   }
