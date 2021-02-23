@@ -28,7 +28,7 @@ git:
   depth: 3
 
 after_success:
-  - npm run travis-deploy-once "yarn multi-semantic-release"
+  - npm run travis-deploy-once "npm run semantic-release"
 
 branches:
   except:
