@@ -106,7 +106,7 @@
     }
   },
   "release": {
-    "pkgRoot": "dist"
+    "pkgRoot": "dist/delayed-dragover"
   },
   "publishConfig": {
     "access": "public"
