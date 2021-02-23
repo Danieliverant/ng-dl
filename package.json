@@ -1,6 +1,6 @@
 {
   "name": "@ng-dl/numeric-input",
-  "version": "0.0.0-semantically-released",
+  "version": "1.3.0",
   "description": "override browser's default behavior & localization on numeric inputs",
   "author": {
     "name": "Daniel Liverant",
