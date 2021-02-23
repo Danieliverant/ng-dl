@@ -41,10 +41,6 @@
   "homepage": "https://github.com/Danieliverant/ng-dl",
   "license": "MIT",
   "private": false,
-  "workspaces": [
-    "projects/*",
-    "src/*"
-  ],
   "dependencies": {
     "@angular/animations": "~10.2.0",
     "@angular/common": "~10.2.0",
