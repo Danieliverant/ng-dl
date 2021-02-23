@@ -4,7 +4,7 @@ language: node_js
 node_js: node
 
 install:
-  - npm i
+  - npm ci
 cache:
   directories:
     - $HOME/.npm
@@ -13,7 +13,8 @@ script:
   - npm run build:numeric-input
   - npm run lint:delayed-dragover
   - npm run build:delayed-dragover
-  - npm run build
+  - npm i @ng-dl/delayed-dragover @ng-dl/numeric-input
+  - npm run build 
 
 deploy:
   provider: pages
