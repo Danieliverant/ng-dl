@@ -20,7 +20,7 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
-  local-dir: dist/ng-dl
+  local-dir: dist/numeric-input
   on:
     branch: master
 
