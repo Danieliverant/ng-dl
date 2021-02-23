@@ -23,6 +23,10 @@
   "dependencies": {
     "tslib": "^2.0.0"
   },
+  "workspaces": [
+    "@ng-dl/delayed-dragover",
+    "@ng-dl/numeric-input"
+  ],
   "release": {
     "pkgRoot": "dist/numeric-input"
   },
