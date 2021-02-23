@@ -28,7 +28,7 @@ git:
   depth: 3
 
 after_success:
-  - npm run travis-deploy-once "npm run semantic-release -e semantic-release-monorepo"
+  - npm run travis-deploy-once "npm run semantic-release"
 
 branches:
   except:

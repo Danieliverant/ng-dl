@@ -11,7 +11,7 @@
     "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "test:watch": "ng test",
     "travis-deploy-once": "travis-deploy-once --pro",
-    "semantic-release": "semantic-release -e semantic-release-monorepo",
+    "semantic-release": "semantic-release",
     "---numeric-input:commands---": "",
     "lint:numeric-input": "ng lint numeric-input",
     "test:numeric-input": "ng test numeric-input --watch=false --browsers=ChromeHeadlessCustom",
