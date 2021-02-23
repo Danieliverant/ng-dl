@@ -1,0 +1,45 @@
+{
+  "name": "@ng-dl/numeric-input",
+  "version": "0.0.0-semantically-released",
+  "description": "override browser's default behavior & localization on numeric inputs",
+  "author": {
+    "name": "Daniel Liverant",
+    "email": "liverant95@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Danieliverant/ng-dl/tree/master/projects/numeric-input"
+  },
+  "bugs": {
+    "url": "https://github.com/Danieliverant/ng-dl/issues"
+  },
+  "homepage": "https://github.com/Danieliverant/ng-dl",
+  "keywords": [
+    "angular",
+    "directive",
+    "localization",
+    "input"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^10.2.0",
+    "@angular/core": "^10.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "release": {
+    "pkgRoot": "dist/numeric-input"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "bundles/ng-dl-numeric-input.umd.js",
+  "module": "fesm2015/ng-dl-numeric-input.js",
+  "es2015": "fesm2015/ng-dl-numeric-input.js",
+  "esm2015": "esm2015/ng-dl-numeric-input.js",
+  "fesm2015": "fesm2015/ng-dl-numeric-input.js",
+  "typings": "ng-dl-numeric-input.d.ts",
+  "metadata": "ng-dl-numeric-input.metadata.json",
+  "sideEffects": false
+}
