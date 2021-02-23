@@ -13,8 +13,7 @@ script:
   - npm run build:numeric-input
   - npm run lint:delayed-dragover
   - npm run build:delayed-dragover
-  - npm i @ng-dl/delayed-dragover @ng-dl/numeric-input
-  - npm run build 
+  - npm run build
 
 deploy:
   provider: pages

@@ -42,7 +42,8 @@
   "license": "MIT",
   "private": false,
   "workspaces": [
-    "projects/*"
+    "projects/*",
+    "src/*"
   ],
   "dependencies": {
     "@angular/animations": "~10.2.0",
