@@ -42,7 +42,8 @@
   "license": "MIT",
   "private": false,
   "workspaces": [
-    "dist/*"
+    "@ng-dl/delayed-dragover",
+    "@ng-dl/numeric-input"
   ],
   "dependencies": {
     "@angular/animations": "~10.2.0",
@@ -55,6 +56,7 @@
     "@angular/router": "~10.2.0",
     "@ng-dl/delayed-dragover": "0.0.1",
     "@ng-dl/numeric-input": "^1.0.5",
+    "multi-semantic-release": "^2.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -65,7 +67,6 @@
     "@angular/compiler-cli": "~10.2.0",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@qiwi/multi-semantic-release": "^3.13.2",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -83,7 +84,6 @@
     "protractor": "~7.0.0",
     "puppeteer": "^5.5.0",
     "semantic-release": "^17.3.9",
-    "semantic-release-monorepo": "^7.0.4",
     "travis-deploy-once": "^5.0.11",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
