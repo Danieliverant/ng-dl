@@ -13,6 +13,7 @@ const DEFAULT_ALLOWED_KEYS = [
   'Tab',
 ];
 
+
 /**
  * Override input attributes for validation and mobile support.
  * @param input - input element

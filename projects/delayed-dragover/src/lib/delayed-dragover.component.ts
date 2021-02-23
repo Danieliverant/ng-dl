@@ -10,6 +10,7 @@ const DEFAULT_TEXT = 'Hover Me';
     <h3>Dragover for 2 seconds see the pre-delayed and another second for the delay</h3>
     <div dlDelayedDragover [dlDragoverDelayStep]="2000" (preDragoverDelayed)="changePreText()"
          (dragoverDelayed)="changeText()" (dragleave)="resetText()">{{ text }}</div>
+
   `
 })
 export class DelayedDragoverComponent {
