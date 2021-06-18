@@ -569,16 +569,18 @@
         };
         NumericInputDirective.prototype.onFormSubmit = function () {
             var _this = this;
-            rxjs.fromEvent(this.el.form, 'submit')
-                .pipe(operators.takeUntil(this.destroy$), operators.tap(function (e) {
-                var formattedValue = getFormattedValue(_this.el.value, _this.decimalSeparator, _this.thousandsSeparator);
-                var isValid = validate(_this.el, formattedValue, _this.min, _this.max);
-                if (!isValid) {
-                    e.preventDefault();
-                    _this.el.reportValidity();
-                }
-            }))
-                .subscribe();
+            if (this.el.form) {
+                rxjs.fromEvent(this.el.form, 'submit')
+                    .pipe(operators.takeUntil(this.destroy$), operators.tap(function (e) {
+                    var formattedValue = getFormattedValue(_this.el.value, _this.decimalSeparator, _this.thousandsSeparator);
+                    var isValid = validate(_this.el, formattedValue, _this.min, _this.max);
+                    if (!isValid) {
+                        e.preventDefault();
+                        _this.el.reportValidity();
+                    }
+                }))
+                    .subscribe();
+            }
         };
         NumericInputDirective.prototype.onValueChange = function () {
             var _this = this;

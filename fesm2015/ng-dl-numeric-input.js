@@ -257,16 +257,18 @@ class NumericInputDirective {
             .subscribe();
     }
     onFormSubmit() {
-        fromEvent(this.el.form, 'submit')
-            .pipe(takeUntil(this.destroy$), tap((e) => {
-            const formattedValue = getFormattedValue(this.el.value, this.decimalSeparator, this.thousandsSeparator);
-            const isValid = validate(this.el, formattedValue, this.min, this.max);
-            if (!isValid) {
-                e.preventDefault();
-                this.el.reportValidity();
-            }
-        }))
-            .subscribe();
+        if (this.el.form) {
+            fromEvent(this.el.form, 'submit')
+                .pipe(takeUntil(this.destroy$), tap((e) => {
+                const formattedValue = getFormattedValue(this.el.value, this.decimalSeparator, this.thousandsSeparator);
+                const isValid = validate(this.el, formattedValue, this.min, this.max);
+                if (!isValid) {
+                    e.preventDefault();
+                    this.el.reportValidity();
+                }
+            }))
+                .subscribe();
+        }
     }
     onValueChange() {
         merge(this.onChange(), this.onDrop(), this.onPaste())
