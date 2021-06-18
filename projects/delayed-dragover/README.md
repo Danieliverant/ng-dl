@@ -41,9 +41,7 @@ Name | Description | Example
 ------------ | ------------- | -------------
 `@Input('dlDelayedDragover') class: string` | The class applied to the element | 'drag-over'
 `@Input('dlDragoverDelay') delay` | Delay in ms | 1000
-`@Input('dlDragoverDelayStep') delayStep` | Delay in addition to the dlDragoverDelay.
-Useful for letting the user change his mind before the default delay -
-i.e. hovering over paginator -> page number changes color -> page changes. | 1000
+`@Input('dlDragoverDelayStep') delayStep` | Delay in addition to the dlDragoverDelay. Useful for letting the user change his mind before the default delay - i.e. hovering over paginator -> page number changes color -> page changes. | 1000
 `@Output() dragoverDelayed` | Emits after the delay | 
 `@Output() preDragoverDelayed` | Emits before the dragoverDelayed if dlDragoverDelayStep in use |
 
