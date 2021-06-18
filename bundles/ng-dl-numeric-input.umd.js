@@ -4,6 +4,28 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global['ng-dl'] = global['ng-dl'] || {}, global['ng-dl']['numeric-input'] = {}), global.ng.core, global.ng.forms, global.rxjs, global.rxjs.operators));
 }(this, (function (exports, i0, forms, rxjs, operators) { 'use strict';
 
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+
     var NUMERIC_INPUT_LOCALE = new i0.InjectionToken('NUMERIC_INPUT_LOCALE');
 
     var LocaleService = /** @class */ (function () {
@@ -52,7 +74,7 @@
         };
         return LocaleService;
     }());
-    LocaleService.ɵprov = i0.ɵɵdefineInjectable({ factory: function LocaleService_Factory() { return new LocaleService(i0.ɵɵinject(NUMERIC_INPUT_LOCALE, 8)); }, token: LocaleService, providedIn: "root" });
+    LocaleService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function LocaleService_Factory() { return new LocaleService(i0__namespace.ɵɵinject(NUMERIC_INPUT_LOCALE, 8)); }, token: LocaleService, providedIn: "root" });
     LocaleService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
@@ -86,6 +108,8 @@
         return extendStatics(d, b);
     };
     function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -271,11 +295,13 @@
         }
         return ar;
     }
+    /** @deprecated */
     function __spread() {
         for (var ar = [], i = 0; i < arguments.length; i++)
             ar = ar.concat(__read(arguments[i]));
         return ar;
     }
+    /** @deprecated */
     function __spreadArrays() {
         for (var s = 0, i = 0, il = arguments.length; i < il; i++)
             s += arguments[i].length;
@@ -284,7 +310,17 @@
                 r[k] = a[j];
         return r;
     }
-    ;
+    function __spreadArray(to, from, pack) {
+        if (pack || arguments.length === 2)
+            for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar)
+                        ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+        return to.concat(ar || from);
+    }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
     }
@@ -349,18 +385,21 @@
     function __importDefault(mod) {
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
-    function __classPrivateFieldGet(receiver, privateMap) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to get private field on non-instance");
-        }
-        return privateMap.get(receiver);
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
     }
-    function __classPrivateFieldSet(receiver, privateMap, value) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to set private field on non-instance");
-        }
-        privateMap.set(receiver, value);
-        return value;
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
     var UNSIGNED_INTEGER_REGEX = '^[0-9]*$';
@@ -501,14 +540,14 @@
         return new RegExp(UNSIGNED_INTEGER_REGEX).test(key);
     }
     function getAllowedKeys(e, decimalSeparators) {
-        var allowedKeys = __spread(DEFAULT_ALLOWED_KEYS);
+        var allowedKeys = __spreadArray([], __read(DEFAULT_ALLOWED_KEYS));
         var originalValue = e.target.value;
         var cursorPosition = e.target.selectionStart || 0;
         var signExists = originalValue.includes('-');
         var separatorExists = decimalSeparators.some(function (separator) { return originalValue.includes(separator); });
         var separatorIsCloseToSign = signExists && cursorPosition <= 1;
         if (!separatorIsCloseToSign && !separatorExists) {
-            allowedKeys.push.apply(allowedKeys, __spread(decimalSeparators));
+            allowedKeys.push.apply(allowedKeys, __spreadArray([], __read(decimalSeparators)));
         }
         var firstCharacterIsSeparator = decimalSeparators.some(function (separator) { return originalValue.charAt(0) === separator; });
         if (!signExists && !firstCharacterIsSeparator && cursorPosition === 0) {

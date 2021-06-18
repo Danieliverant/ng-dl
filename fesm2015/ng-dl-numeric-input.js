@@ -1,4 +1,5 @@
-import { InjectionToken, ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, Optional, EventEmitter, Directive, ElementRef, Input, Output, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { InjectionToken, Injectable, Inject, Optional, EventEmitter, Directive, ElementRef, Input, Output, NgModule } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
@@ -44,7 +45,7 @@ class LocaleService {
         }
     }
 }
-LocaleService.ɵprov = ɵɵdefineInjectable({ factory: function LocaleService_Factory() { return new LocaleService(ɵɵinject(NUMERIC_INPUT_LOCALE, 8)); }, token: LocaleService, providedIn: "root" });
+LocaleService.ɵprov = i0.ɵɵdefineInjectable({ factory: function LocaleService_Factory() { return new LocaleService(i0.ɵɵinject(NUMERIC_INPUT_LOCALE, 8)); }, token: LocaleService, providedIn: "root" });
 LocaleService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
