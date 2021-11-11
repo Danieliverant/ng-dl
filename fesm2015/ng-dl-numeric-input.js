@@ -68,6 +68,7 @@ const DEFAULT_ALLOWED_KEYS = [
     'ArrowRight',
     'Escape',
     'Tab',
+    'Enter'
 ];
 /**
  * Override input attributes for validation and mobile support.
