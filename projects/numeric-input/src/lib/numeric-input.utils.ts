@@ -11,6 +11,7 @@ const DEFAULT_ALLOWED_KEYS = [
   'ArrowRight',
   'Escape',
   'Tab',
+  'Enter'
 ];
 
 
