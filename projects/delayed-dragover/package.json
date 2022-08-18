@@ -17,8 +17,8 @@
   "keywords": ["angular", "directive", "drag", "dragndrop", "drag&drop", "delay", "delayed"],
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^12.0.5",
-    "@angular/core": "^12.0.5"
+    "@angular/common": "^14",
+    "@angular/core": "^14"
   },
   "dependencies": {
     "tslib": "^2.0.0"
