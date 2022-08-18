@@ -53,7 +53,7 @@ describe('dlNumericInput', () => {
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'test-cmp',
+  selector: 'dl-test-cmp',
   template: ``
 })
 class TestComponent {
