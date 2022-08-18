@@ -61,6 +61,7 @@
     "@angular/router": "^14.1.3",
     "@ng-dl/delayed-dragover": "^3.0.1",
     "@ng-dl/numeric-input": "^3.0.2",
+    "@ng-dl/utils": "0.0.1",
     "multi-semantic-release": "^2.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
