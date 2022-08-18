@@ -4,7 +4,7 @@ Simple solutions for real problems in the web development world.
 
 ## 👨‍💻 About Me
 
-My name is Daniel Liverant I'm a front-end developer mainly focused on Angular, 
+My name is Daniel Liverant I'm a Software Developer mainly focused on Frontend, especially Angular ecosystem, 
 based in Israel.
 
 
