@@ -1,6 +1,6 @@
 {
   "name": "@ng-dl/numeric-input",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "override browser's default behavior & localization on numeric inputs",
   "author": {
     "name": "Daniel Liverant",
@@ -22,8 +22,8 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^12.0.5",
-    "@angular/core": "^12.0.5"
+    "@angular/common": "^14",
+    "@angular/core": "^14"
   },
   "dependencies": {
     "tslib": "^2.0.0"
@@ -34,12 +34,24 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "bundles/ng-dl-numeric-input.umd.js",
-  "module": "fesm2015/ng-dl-numeric-input.js",
-  "es2015": "fesm2015/ng-dl-numeric-input.js",
-  "esm2015": "esm2015/ng-dl-numeric-input.js",
-  "fesm2015": "fesm2015/ng-dl-numeric-input.js",
-  "typings": "ng-dl-numeric-input.d.ts",
-  "metadata": "ng-dl-numeric-input.metadata.json",
+  "module": "fesm2015/ng-dl-numeric-input.mjs",
+  "es2020": "fesm2020/ng-dl-numeric-input.mjs",
+  "esm2020": "esm2020/ng-dl-numeric-input.mjs",
+  "fesm2020": "fesm2020/ng-dl-numeric-input.mjs",
+  "fesm2015": "fesm2015/ng-dl-numeric-input.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/ng-dl-numeric-input.mjs",
+      "es2020": "./fesm2020/ng-dl-numeric-input.mjs",
+      "es2015": "./fesm2015/ng-dl-numeric-input.mjs",
+      "node": "./fesm2015/ng-dl-numeric-input.mjs",
+      "default": "./fesm2020/ng-dl-numeric-input.mjs"
+    }
+  },
   "sideEffects": false
 }

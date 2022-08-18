@@ -1,59 +1,8 @@
 import * as i0 from '@angular/core';
-import { InjectionToken, Injectable, Inject, Optional, EventEmitter, Directive, ElementRef, Input, Output, NgModule } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { InjectionToken, Injectable, Inject, Optional, EventEmitter, Directive, Input, Output, NgModule } from '@angular/core';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
-
-const NUMERIC_INPUT_LOCALE = new InjectionToken('NUMERIC_INPUT_LOCALE');
-
-class LocaleService {
-    constructor(locales) {
-        this.locales = locales;
-    }
-    getDecimalSeparators() {
-        const locales = this.getLocales();
-        const options = { useGrouping: false };
-        return locales.map(locale => this.localizedToDecimalSeparator(this.localizeDecimal(1.1, locale, options)));
-    }
-    getThousandSeparators() {
-        const locales = this.getLocales();
-        const options = { useGrouping: true };
-        return locales.map(locale => this.localizedToThousandSeparator(this.localizeDecimal(1234.5, locale, options)));
-    }
-    localizeNumber(value) {
-        return value.toLocaleString(this.getLocales());
-    }
-    localizedToDecimalSeparator(localizedParts) {
-        return localizedParts.find(part => part.type === 'decimal').value;
-    }
-    localizedToThousandSeparator(localizedParts) {
-        return localizedParts.find(part => part.type === 'group').value;
-    }
-    localizeDecimal(value, locale, options) {
-        return Intl.NumberFormat(locale, options).formatToParts(value);
-    }
-    get localeFromBrowser() {
-        return navigator.languages ? navigator.languages[0] : navigator.language;
-    }
-    getLocales() {
-        try {
-            const supportedLocales = Intl.NumberFormat.supportedLocalesOf(this.locales);
-            return supportedLocales;
-        }
-        catch (_a) {
-            return [this.localeFromBrowser];
-        }
-    }
-}
-LocaleService.ɵprov = i0.ɵɵdefineInjectable({ factory: function LocaleService_Factory() { return new LocaleService(i0.ɵɵinject(NUMERIC_INPUT_LOCALE, 8)); }, token: LocaleService, providedIn: "root" });
-LocaleService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-LocaleService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [NUMERIC_INPUT_LOCALE,] }, { type: Optional }] }
-];
+import * as i2 from '@angular/forms';
 
 const UNSIGNED_INTEGER_REGEX = '^[0-9]*$';
 const SIGNED_DOUBLE_REGEX = '^-?[0-9]+(.[0-9]+)?$';
@@ -210,6 +159,61 @@ function getAllowedKeys(e, decimalSeparators) {
     return allowedKeys;
 }
 
+const NUMERIC_INPUT_LOCALE = new InjectionToken('NUMERIC_INPUT_LOCALE');
+
+class LocaleService {
+    constructor(locales) {
+        this.locales = locales;
+    }
+    getDecimalSeparators() {
+        const locales = this.getLocales();
+        const options = { useGrouping: false };
+        return locales.map(locale => this.localizedToDecimalSeparator(this.localizeDecimal(1.1, locale, options)));
+    }
+    getThousandSeparators() {
+        const locales = this.getLocales();
+        const options = { useGrouping: true };
+        return locales.map(locale => this.localizedToThousandSeparator(this.localizeDecimal(1234.5, locale, options)));
+    }
+    localizeNumber(value) {
+        return value.toLocaleString(this.getLocales());
+    }
+    localizedToDecimalSeparator(localizedParts) {
+        return localizedParts.find(part => part.type === 'decimal').value;
+    }
+    localizedToThousandSeparator(localizedParts) {
+        return localizedParts.find(part => part.type === 'group').value;
+    }
+    localizeDecimal(value, locale, options) {
+        return Intl.NumberFormat(locale, options).formatToParts(value);
+    }
+    get localeFromBrowser() {
+        return navigator.languages ? navigator.languages[0] : navigator.language;
+    }
+    getLocales() {
+        try {
+            const supportedLocales = Intl.NumberFormat.supportedLocalesOf(this.locales);
+            return supportedLocales;
+        }
+        catch {
+            return [this.localeFromBrowser];
+        }
+    }
+}
+LocaleService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: LocaleService, deps: [{ token: NUMERIC_INPUT_LOCALE, optional: true }], target: i0.ɵɵFactoryTarget.Injectable });
+LocaleService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: LocaleService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: LocaleService, decorators: [{
+            type: Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [NUMERIC_INPUT_LOCALE]
+                }, {
+                    type: Optional
+                }] }]; } });
+
 class NumericInputDirective {
     constructor(hostElement, localeService, control) {
         this.hostElement = hostElement;
@@ -230,22 +234,21 @@ class NumericInputDirective {
         this.destroy$.next();
     }
     setValue(value) {
-        var _a;
         const formattedValue = getFormattedValue(value, this.decimalSeparator, this.thousandsSeparator);
         this.localized.emit(this.localeService.localizeNumber(formattedValue));
         this.el.value = formattedValue.toString();
         if (this.control) {
-            (_a = this.control.control) === null || _a === void 0 ? void 0 : _a.patchValue(formattedValue);
+            this.control.control?.patchValue(formattedValue);
         }
     }
     onChange() {
         return fromEvent(this.el, 'change').pipe(map(() => this.el.value));
     }
     onPaste() {
-        return fromEvent(this.el, 'paste').pipe(tap((e) => e.preventDefault()), map((e) => { var _a; return ((_a = e.clipboardData) === null || _a === void 0 ? void 0 : _a.getData('text/plain')) || ''; }));
+        return fromEvent(this.el, 'paste').pipe(tap((e) => e.preventDefault()), map((e) => e.clipboardData?.getData('text/plain') || ''));
     }
     onDrop() {
-        return fromEvent(this.el, 'drop').pipe(tap((e) => e.preventDefault()), map((e) => { var _a; return ((_a = e.dataTransfer) === null || _a === void 0 ? void 0 : _a.getData('text')) || ''; }));
+        return fromEvent(this.el, 'drop').pipe(tap((e) => e.preventDefault()), map((e) => e.dataTransfer?.getData('text') || ''));
     }
     onKeyDown() {
         fromEvent(this.el, 'keydown')
@@ -287,31 +290,36 @@ class NumericInputDirective {
         return this.thousandSeparators[0];
     }
 }
-NumericInputDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[dlNumericInput]',
-            },] }
-];
-NumericInputDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: LocaleService },
-    { type: NgControl, decorators: [{ type: Optional }] }
-];
-NumericInputDirective.propDecorators = {
-    min: [{ type: Input }],
-    max: [{ type: Input }],
-    localized: [{ type: Output }]
-};
+NumericInputDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NumericInputDirective, deps: [{ token: i0.ElementRef }, { token: LocaleService }, { token: i2.NgControl, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+NumericInputDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "14.1.3", type: NumericInputDirective, selector: "[dlNumericInput]", inputs: { min: "min", max: "max" }, outputs: { localized: "localized" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NumericInputDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[dlNumericInput]',
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: LocaleService }, { type: i2.NgControl, decorators: [{
+                    type: Optional
+                }] }]; }, propDecorators: { min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], localized: [{
+                type: Output
+            }] } });
 
 class NumericInputModule {
 }
-NumericInputModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [NumericInputDirective],
-                imports: [],
-                exports: [NumericInputDirective]
-            },] }
-];
+NumericInputModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NumericInputModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+NumericInputModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.1.3", ngImport: i0, type: NumericInputModule, declarations: [NumericInputDirective], exports: [NumericInputDirective] });
+NumericInputModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NumericInputModule });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NumericInputModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    declarations: [NumericInputDirective],
+                    imports: [],
+                    exports: [NumericInputDirective]
+                }]
+        }] });
 
 /*
  * Public API Surface of numeric-input
@@ -321,5 +329,5 @@ NumericInputModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { NUMERIC_INPUT_LOCALE, NumericInputModule, NumericInputDirective as ɵa, LocaleService as ɵb };
-//# sourceMappingURL=ng-dl-numeric-input.js.map
+export { NUMERIC_INPUT_LOCALE, NumericInputDirective, NumericInputModule };
+//# sourceMappingURL=ng-dl-numeric-input.mjs.map

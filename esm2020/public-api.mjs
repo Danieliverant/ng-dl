@@ -1,0 +1,7 @@
+/*
+ * Public API Surface of numeric-input
+ */
+export * from './lib/numeric-input.module';
+export * from './lib/locale.tokens';
+export * from './lib/numeric-input.directive';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL251bWVyaWMtaW5wdXQvc3JjL3B1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLDRCQUE0QixDQUFDO0FBQzNDLGNBQWMscUJBQXFCLENBQUM7QUFDcEMsY0FBYywrQkFBK0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2YgbnVtZXJpYy1pbnB1dFxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vbGliL251bWVyaWMtaW5wdXQubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2xvY2FsZS50b2tlbnMnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbnVtZXJpYy1pbnB1dC5kaXJlY3RpdmUnO1xuIl19

@@ -1,6 +1,7 @@
 import { AfterViewInit, ElementRef, EventEmitter, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { LocaleService } from './locale.service';
+import * as i0 from "@angular/core";
 export declare class NumericInputDirective implements AfterViewInit, OnDestroy {
     private hostElement;
     private localeService;
@@ -24,4 +25,6 @@ export declare class NumericInputDirective implements AfterViewInit, OnDestroy {
     private get el();
     private get decimalSeparator();
     private get thousandsSeparator();
+    static ɵfac: i0.ɵɵFactoryDeclaration<NumericInputDirective, [null, null, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NumericInputDirective, "[dlNumericInput]", never, { "min": "min"; "max": "max"; }, { "localized": "localized"; }, never, never, false>;
 }
