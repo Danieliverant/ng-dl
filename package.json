@@ -1,6 +1,6 @@
 {
   "name": "ng-dl",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -52,7 +52,7 @@
     "@angular/platform-browser": "~13.3.11",
     "@angular/platform-browser-dynamic": "~13.3.11",
     "@angular/router": "~13.3.11",
-    "@ng-dl/delayed-dragover": "^3.0.0",
+    "@ng-dl/delayed-dragover": "^3.0.1",
     "@ng-dl/numeric-input": "^3.0.1",
     "multi-semantic-release": "^2.6.0",
     "rxjs": "~6.6.0",
