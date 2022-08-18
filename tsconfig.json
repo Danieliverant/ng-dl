@@ -17,14 +17,8 @@
       "esnext.intl"
     ],
     "paths": {
-      "numeric-input": [
-        "dist/numeric-input/numeric-input",
-        "dist/numeric-input"
-      ],
-      "delayed-dragover": [
-        "dist/delayed-dragover/delayed-dragover",
-        "dist/delayed-dragover"
-      ]
+      "@ng-dl/numeric-input": ["projects/numeric-input/src/public-api.ts"],
+      "@ng-dl/delayed-dragover": ["projects/delayed-dragover/src/public-api.ts"],
     }
   }
 }

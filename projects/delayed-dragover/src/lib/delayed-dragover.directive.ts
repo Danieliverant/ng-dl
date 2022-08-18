@@ -47,6 +47,7 @@ export class DelayedDragoverDirective implements OnInit {
   private dragoverCounter = 0;
 
   constructor(private readonly element: ElementRef<HTMLElement>) {
+    console.log('hello');
   }
 
   ngOnInit(): void {
