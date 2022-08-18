@@ -26,8 +26,15 @@
     "publish:delayed-dragover": "cd dist/delayed-dragover && npm publish",
     "install:delayed-dragover": "npm i @ng-dl/delayed-dragover@latest",
     "pack:delayed-dragover": "npm run build:delayed-dragover && npm run publish:delayed-dragover && npm run install:delayed-dragover",
+    "---utils:commands---": "",
+    "lint:utils": "ng lint utils",
+    "test:utils": "ng test utils --watch=false --browsers=ChromeHeadlessCustom",
+    "build:utils": "ng build utils --configuration=production",
+    "publish:utils": "cd dist/utils && npm publish",
+    "install:utils": "npm i @ng-dl/utils@latest",
+    "pack:utils": "npm run build:utils && npm run publish:utils && npm run install:utils",
     "---ALL---": "",
-    "pack:all": "npm run pack:delayed-dragover &&npm run pack:numeric-input"
+    "pack:all": "npm run pack:delayed-dragover &&npm run pack:numeric-input && npm run pack:utils"
   },
   "author": {
     "name": "Daniel Liverant",

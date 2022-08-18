@@ -18,7 +18,12 @@
     ],
     "paths": {
       "@ng-dl/numeric-input": ["projects/numeric-input/src/public-api.ts"],
-      "@ng-dl/delayed-dragover": ["projects/delayed-dragover/src/public-api.ts"],
+      "@ng-dl/delayed-dragover": [
+        "projects/delayed-dragover/src/public-api.ts"
+      ],
+      "utils": [
+        "dist/utils"
+      ],
     }
   }
 }
