@@ -1,5 +1,5 @@
 import { ComponentProps } from './models/props';
-import { ComponentRef, inject, Type, ViewContainerRef } from '@angular/core';
+import { ComponentRef, EmbeddedViewRef, inject, Type, ViewContainerRef } from '@angular/core';
 
 /**
  * Used to extract innerHTML from Angular Component after rendering.
@@ -11,28 +11,26 @@ import { ComponentRef, inject, Type, ViewContainerRef } from '@angular/core';
  * ```
  * @param component - component to extract innerHTML from.
  */
-export function compileComponentToInnerHTMLFactory<T extends object>(
-  component: Type<T>
-): (inputs?: ComponentProps<T>) => string {
+export function compileComponentToInnerHTMLFactory<C extends object>(
+  component: Type<C>
+): (inputs?: ComponentProps<C>) => string {
   const vcr = inject(ViewContainerRef);
-  const instance = vcr.createComponent<T>(component);
+  const componentRef = vcr.createComponent<C>(component);
 
-  return (inputs?: ComponentProps<T>): string => {
+  return (inputs?: ComponentProps<C>): string => {
     if (inputs) {
-      setInputsToComponent(inputs, instance);
-      instance.changeDetectorRef.detectChanges();
+      setInputsToComponent(inputs, componentRef);
+      componentRef.changeDetectorRef.detectChanges();
     }
-    const innerHTML = (instance.hostView as any).rootNodes[0].innerHTML;
-    instance.destroy();
+    const innerHTML = (componentRef.hostView as EmbeddedViewRef<C>).rootNodes[0].innerHTML;
+    componentRef.destroy();
     return innerHTML;
   };
 }
 
-function setInputsToComponent<T extends object>(
-  inputs: ComponentProps<T>,
-  instance: ComponentRef<T>
+function setInputsToComponent<C extends object>(
+  inputs: ComponentProps<C>,
+  componentRef: ComponentRef<C>
 ): void {
-  Object.entries(inputs).forEach(([key, value]) => {
-    instance.setInput(key, value);
-  });
+  Object.entries(inputs).forEach(([key, value]) => componentRef.setInput(key, value));
 }
