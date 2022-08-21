@@ -15,9 +15,9 @@ export function compileComponentToInnerHTMLFactory<C extends object>(
   component: Type<C>
 ): (inputs?: ComponentProps<C>) => string {
   const vcr = inject(ViewContainerRef);
-  const componentRef = vcr.createComponent<C>(component);
 
   return (inputs?: ComponentProps<C>): string => {
+    const componentRef = vcr.createComponent<C>(component);
     if (inputs) {
       setInputsToComponent(inputs, componentRef);
       componentRef.changeDetectorRef.detectChanges();
