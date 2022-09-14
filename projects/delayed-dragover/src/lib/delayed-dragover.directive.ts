@@ -46,9 +46,7 @@ export class DelayedDragoverDirective implements OnInit {
   // https://stackoverflow.com/questions/14203734/dragend-dragenter-and-dragleave-firing-off-immediately-when-i-drag
   private dragoverCounter = 0;
 
-  constructor(private readonly element: ElementRef<HTMLElement>) {
-    console.log('hello');
-  }
+  constructor(private readonly element: ElementRef<HTMLElement>) { }
 
   ngOnInit(): void {
     const hide$ = fromEvent(this.element.nativeElement, 'dragleave').pipe(tap(_ => this.dragoverCounter--));
