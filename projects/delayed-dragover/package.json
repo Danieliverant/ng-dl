@@ -1,6 +1,6 @@
 {
   "name": "@ng-dl/delayed-dragover",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Delay for dragover event and cross-device compatibility",
   "author": {
     "name": "Daniel Liverant",
