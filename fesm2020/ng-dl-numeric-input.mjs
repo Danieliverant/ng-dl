@@ -173,7 +173,7 @@ class LocaleService {
     getThousandSeparators() {
         const locales = this.getLocales();
         const options = { useGrouping: true };
-        return locales.map(locale => this.localizedToThousandSeparator(this.localizeDecimal(1234.5, locale, options)));
+        return locales.map(locale => this.localizedToThousandSeparator(this.localizeDecimal(12345.6, locale, options)));
     }
     localizeNumber(value) {
         return value.toLocaleString(this.getLocales());
