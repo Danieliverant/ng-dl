@@ -60,7 +60,7 @@
     "@angular/platform-browser-dynamic": "^15.1.2",
     "@angular/router": "^15.1.2",
     "@ng-dl/delayed-dragover": "^3.1.0",
-    "@ng-dl/numeric-input": "^3.0.3",
+    "@ng-dl/numeric-input": "^3.1.1",
     "@ng-dl/utils": "0.0.2",
     "multi-semantic-release": "^2.6.0",
     "rxjs": "~6.6.0",
