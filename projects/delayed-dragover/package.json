@@ -1,6 +1,6 @@
 {
   "name": "@ng-dl/delayed-dragover",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Delay for dragover event and cross-device compatibility",
   "author": {
     "name": "Daniel Liverant",
@@ -17,8 +17,8 @@
   "keywords": ["angular", "directive", "drag", "dragndrop", "drag&drop", "delay", "delayed"],
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^14",
-    "@angular/core": "^14"
+    "@angular/common": ">=14",
+    "@angular/core": ">=14"
   },
   "dependencies": {
     "tslib": "^2.0.0"

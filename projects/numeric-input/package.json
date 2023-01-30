@@ -1,6 +1,6 @@
 {
   "name": "@ng-dl/numeric-input",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "override browser's default behavior & localization on numeric inputs",
   "author": {
     "name": "Daniel Liverant",
@@ -17,8 +17,8 @@
   "keywords": ["angular", "directive", "localization", "input"],
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^14",
-    "@angular/core": "^14"
+    "@angular/common": ">=14",
+    "@angular/core": ">=14"
   },
   "dependencies": {
     "tslib": "^2.0.0"
