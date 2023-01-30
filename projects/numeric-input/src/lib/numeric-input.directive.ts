@@ -29,7 +29,7 @@ export class NumericInputDirective implements AfterViewInit, OnDestroy {
 
   private readonly decimalSeparators = this.localeService.getDecimalSeparators();
   private readonly thousandSeparators = this.localeService.getThousandSeparators();
-  private readonly destroy$ = new Subject();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private hostElement: ElementRef,
